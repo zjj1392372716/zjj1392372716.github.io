@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo,Hexo,GitHub,">
+    <meta name="keywords" content="CSS3 CSS,面试,CSS3,">
   
 
   <script>
@@ -195,24 +195,24 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span>使用Hexo创建自己的个人博客</span>
+    <span>css3 新特性</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-04-08
+      2019-04-16
     </span>
     
       <span>
         分类 : 
-          <a href="/categories/Hexo/">
-            Hexo
+          <a href="/categories/CSS3-CSS/">
+            CSS3 CSS
           </a>
       </span>
     
     
       <span>
-        浏览 : <span class="article-timer" data-identity="hexo-first"></span>
+        浏览 : <span class="article-timer" data-identity="css3-new"></span>
       </span>
     
   </div>
@@ -221,20 +221,80 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <blockquote>
-<p>参考文章</p>
+      <h1 id="CSS3-新特性-1"><a href="#CSS3-新特性-1" class="headerlink" title="CSS3 新特性"></a>CSS3 新特性</h1><h2 id="一、currentColor变量-1"><a href="#一、currentColor变量-1" class="headerlink" title="一、currentColor变量"></a>一、currentColor变量</h2><blockquote>
+<p><code>currentColor</code>代表了当前元素被应用上的<code>color</code>颜色值。(这里的color值可以是自己明确定义的，也可以是继承而来的) 使用它可以将当前这个颜色值应用到其他属性上，或者嵌套元素的其他属性上。</p>
 </blockquote>
-<p><a href="https://www.jianshu.com/p/484e4ca7edf0" target="_blank" rel="noopener">在Mac上搭建基于Hexo的个人博客网站</a></p>
-<p>本文仅记录在安装以及配置中的一些坑,具体过程上一篇文章写的很棒！！</p>
-<p><strong>一、安装(Mac)</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cnpm install -g hexo</span><br></pre></td></tr></table></figure>
-<p><strong>二、启动</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p><strong>三、发布到github</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p><strong>四、漏洞解决</strong></p>
-<p>当你第一次执行 <code>hexo deploy</code> 的时候如果报错<code>ERROR Deployer not found: git</code>。解决办法是执行如下命令，然后再执行 <code>hexo deploy</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<p><strong>我们可以通过一些场景来认识这个新特性</strong></p>
+<p><strong>场景一</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;约么？&lt;/p&gt;   </span><br><span class="line"><span class="selector-tag">p</span>&#123;   </span><br><span class="line">    <span class="attribute">color</span>: red;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时，<code>&lt;p&gt;</code>标签currentColor的值为red。</p>
+<p><strong>场景二</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class="container"&gt;   </span><br><span class="line">    &lt;p&gt;约么？&lt;/p&gt;   </span><br><span class="line">&lt;/div&gt;   </span><br><span class="line"><span class="selector-class">.container</span>&#123;   </span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#00ff00</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们没有给</p><p>标签指定颜色，它的color从父级容器也就是class为container的div继承而来，换句话说此时p标签的color为#00ff00，currentColor又是直接去取元素的color值，所以此时p标签的currentColor值也为#00ff00.</p>
+<p><strong>场景三</strong></p>
+<p>如果父级元素也没有指定颜色，那它的父级元素就会从父级的父级去继承，直到文档的根结点html标签都还没显示指定一个颜色呢，就应用上浏览器默认的颜色呗（#000）~</p>
+<p><strong>场景四</strong></p>
+<p>当你需要为该元素其他属性指定颜色的时候，它就可以登上舞台了 ～～</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class="container"&gt;   </span><br><span class="line">    好好说话，有话好好说   </span><br><span class="line">&lt;/div&gt;   </span><br><span class="line"><span class="selector-class">.container</span>&#123;   </span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#3CAADB</span>;   </span><br><span class="line">    <span class="attribute">border</span>: <span class="number">4px</span> solid currentColor;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://files.jb51.net/file_images/article/201602/2016227111807718.png?2016127111816" alt></p>
+<p>这里我们第一次领略了currentColor的奇效。在指定边框颜色的时候，我们直接使用currentColor变量，而没有写一个传统的颜色值。</p>
+<p>你似乎也知道了该如何用了。不只是border，其他能够使用颜色的地方，比如background，box-shadow等等,与渐变混搭等等。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class="container"&gt;   </span><br><span class="line">&lt;/div&gt;   </span><br><span class="line"><span class="selector-class">.container</span>&#123;   </span><br><span class="line">  <span class="attribute">height</span>:<span class="number">200px</span>;   </span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#3CAADB</span>;   </span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to rightright, #fff, currentColor 100%);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://files.jb51.net/file_images/article/201602/2016227111918197.png?2016127111926" alt></p>
+<p><strong>场景五</strong></p>
+<p>它甚至可以用于填充SVG。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">svg</span> &#123;     </span><br><span class="line">  <span class="attribute">fill</span>: currentColor;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另一种方式是用于伪元素：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span> &#123;     </span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;     </span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#333</span>;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;     </span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#666</span>;   </span><br><span class="line">&#125;   </span><br><span class="line">  </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:after</span>,     </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">:after</span>,     </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span><span class="selector-pseudo">:after</span> &#123;     </span><br><span class="line">  <span class="attribute">background</span>: currentColor;   </span><br><span class="line">  <span class="comment">/* currentColor 就是 上面我们所设置的不同颜色了 */</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二、细说伪类选择器和伪元素选择器"><a href="#二、细说伪类选择器和伪元素选择器" class="headerlink" title="二、细说伪类选择器和伪元素选择器"></a>二、细说伪类选择器和伪元素选择器</h2><p>无论是伪类还是伪元素，都属于CSS选择器的范畴。标准规定，1.伪类使用单冒号 2.伪元素使用双冒号。</p>
+<p><strong>伪类选择器</strong></p>
+<p>（伪类可以针对多个元素）<br>常用的<code>伪类选择器</code>是使用在<code>a</code>元素上的几种，<code>如a:link | a:visited | a:hover | a:active</code></p>
+<ul>
+<li>注意：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">提示：在 CSS 定义中，a:hover 必须被置于 a:link 和 a:visited 之后，才是有效的。</span><br><span class="line">提示：在 CSS 定义中，a:active 必须被置于 a:hover 之后，才是有效的。</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">链接被访问之前选中</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">  &#125;</span><br><span class="line">链接被访问之后选中</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line">  &#125;</span><br><span class="line">鼠标悬停被选中</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: green;</span><br><span class="line">  &#125;</span><br><span class="line">链接被按下之后</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>: yellow;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>由于样式的叠加特性和用户的操作先后顺序影响，以上四个伪类选择器在书写时尽量按照<code>link vistied hover active</code>的顺序来书写.</p>
+<p><strong>我们可以这么记忆：访问前 + 访问后 + 鼠标移上去 + 鼠标点击中,之所以要规定顺序，是因为CSS默认以后出现的样式会覆盖之前出现的样式，所以如果不按照一定的顺序，就不能实现我们预期的效果。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如：我们把hover放在了active之后，当我们正在点击链接的时候其实也是在目标的上方，也会触发hover，这时候color就会被hover的覆盖了，不会显示我们active时候设置的颜色值了。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结构性伪类选择器</p>
+</blockquote>
+<ul>
+<li><ol>
+<li>四个最基本的：root、not、empty、target   </li>
+</ol>
+</li>
+<li><ol start="2">
+<li>first-child、last-child、nth-child、nth-last-child、<br>nth-child(odd)、nth-child(even)、nth-last-child(odd)、nth-last-child(even)</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>nth-of-type、nth-last-of-type    </li>
+</ol>
+</li>
+<li><ol start="4">
+<li>循环使用样式  </li>
+</ol>
+</li>
+<li><ol start="5">
+<li>only-child</li>
+</ol>
+</li>
+<li>:root()选择器，从字面上我们就可以很清楚的理解是根选择器，“:root”选择器等同于<html>元素</html></li>
+<li>:not()选择器称为否定选择器，和jQuery中的:not选择器一模一样，可以选择除某个元素之外的所有元素。</li>
+<li>:empty()选择器表示的就是空。用来选择没有任何内容的元素，这里没有内容指的是一点内容都没有，哪怕是一个空格。</li>
+<li>:target()选择器来对页面某个target元素(该元素的id被当做页面中的超链接来使用)指定样式，该样式只在用户点击了页面中的超链接，并且跳转到target元素后起作用</li>
+</ul>
+<p><strong>伪元素选择器</strong></p>
+<p>常用的伪元素选择器：（主要针对单个元素）</p>
+<ul>
+<li>first-line:为某个元素的第一行文字使用样式；</li>
+<li>first-letter:为某个元素中的文字的首字母或第一个字使用样式；</li>
+<li>before:在某个元素之前插入一些内容；</li>
+<li>after: 在某个元素之后插入一些内容；</li>
+</ul>
+<p><img src="https://img-blog.csdn.net/20180707142441300?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhbXQzMjc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
     </div>
   </div>
   
@@ -245,7 +305,7 @@
         
           本文作者 : 张锦杰 <br>
         
-        原文链接 : <a href>http://yoursite.com/2019/04/08/hexo-first/</a><br>
+        原文链接 : <a href>http://yoursite.com/2019/04/16/css3-new/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -305,14 +365,14 @@
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/Hexo/">
-              #Hexo
+            <a href="/tags/面试/">
+              #面试
             </a>
           </span>
           
           <span class="span--tag">
-            <a href="/tags/GitHub/">
-              #GitHub
+            <a href="/tags/CSS3/">
+              #CSS3
             </a>
           </span>
           
@@ -334,10 +394,16 @@
 
   <nav class="post-navigation">
     
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/04/08/js-array-oper/" target="_self">Javascript中常用的数组操作</a>
+      </div>
+    
     
       <div class="nav-next">
         下一篇:
-        <a href="/2019/04/08/js-array-oper/" target="_self">Javascript中常用的数组操作</a>
+        <a href="/2019/04/18/first-servlet/" target="_self">Servlet 学习笔记（一）</a>
         <i class="iconfont icon-next"></i>
       </div>
     
