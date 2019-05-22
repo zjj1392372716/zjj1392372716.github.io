@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="张锦杰">
+  
+  
+  
+  <title>Meils 的 Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSR,SSR,">
+  
+
+  <script>
+    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script>
+
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">Meils 的 Blog</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a href="/" target="_self">
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/" target="_self">
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/" target="_self">
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/" target="_self">
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          
+            <a href="/friends/" target="_self">
+              友链
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path>
+          
+            <a href="javascript:void(0);" v-else>抓到我</a>
+            <ul class="nav-menu--dropdown">
+              
+                <li>
+                  <a href="https://github.com/zjj1392372716" target="_blank">
+                    Github
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://juejin.im/user/5a1cbb46518825592c07d5f6" target="_blank">
+                    掘金
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://segmentfault.com/u/guchengshaonian_5a56fe95f2c32" target="_blank">
+                    思否
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>服务端渲染 SSR</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-05-15
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/SSR/">
+            SSR
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="server-SSR-1"></span>
+      </span>
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h1 id="服务端渲染-SSR-1"><a href="#服务端渲染-SSR-1" class="headerlink" title="服务端渲染 SSR"></a>服务端渲染 SSR</h1><h2 id="1、从前端发展史来看服务器端渲染-1"><a href="#1、从前端发展史来看服务器端渲染-1" class="headerlink" title="1、从前端发展史来看服务器端渲染"></a>1、从前端发展史来看服务器端渲染</h2><p>前段时间在知乎上看到一篇提问，说的是为什么现在又开始流行服务器端渲染html了。整理了网上一些评论，结合自己的想法，整理出了一段前端发展史。</p>
+<ul>
+<li>早在1989年，HTML的诞生是一个物理学家为了方便学术文档的分享而创造，这个也是前端起始的时间。后来，CSS和Javascript加入前端行列，用来渲染页面样式和处理页面动效逻辑，前端三剑客成立。刚开始的前端程序员，其实就是做切图写样式（CSS）和做页面特效（JS）等一切基础的工作，处于程序员鄙视链的底层。</li>
+</ul>
+<ul>
+<li><p>随着互联网发展与技术进步，静态页面已经远不能满足产品需求，页面上要根据逻辑产生动态的数据，这时，便迎来PHP,JSP等为代表的web1.0时代。此时的服务器渲染，是以“文档”为核心思想。服务器端的逻辑是把HTML，CSS和JS当做一个静态文件，对“文档”而言不存在“指令”和“数据”的区别，一切都是数据。</p>
+</li>
+<li><p>所以我们可以看到服务器渲染，GET就是请求一个文件，而web 1.0时代的诸多服务端框架最基础的组件之一就是文档模版，比如asp, JSP之类，核心设计理念就是HTML文件里放占位符然后由服务端逻辑替换成实际数据后一股脑返回。</p>
+</li>
+</ul>
+<ul>
+<li>很多中小型项目，不分前端后端，大家都是web开发工程师，按现在的说法叫全栈工程师。而在现在来看，这样的模式是存在很多问题的，拿jsp举例，动态资源和静态资源完全耦合，服务器压力大，而且一旦出现状况，前后台一起玩完，用户体验极差；jsp必须要在支持java的web服务器里运行，性能提不上来；如果jsp中内容很多，页面响应会很慢……</li>
+</ul>
+<ul>
+<li><p>1998年，IE5.0引入XMLHttpRequest技术，实现了异步调用服务器的功能，2005年，Google在它著名的交互应用程序中使用了ajax异步通讯，web前端引来2.0革命。之后W3C发布XMLHttpRequest标准，为之后的ajax爆发提供技术基础。</p>
+</li>
+<li><p>2006年，JQuery工具库发布，一经出世凭借其简单易容的特性和解决浏览器兼容性的能力风靡全球。</p>
+</li>
+<li><p>2010年，Backbone诞生，RequireJS第一个版本发布，前端的模块化开发时代正式来临了。而后，随着前端MVC的兴起，SPA（Single Page Application 单页面应用）开始变成一种项目开发的潮流，前后端分工非常清晰。前端工作在浏览器端，后端工作在服务端。清晰的分工，可以让开发并行，测试数据的模拟不难，前端可以本地开发。此时前后端分离的运动在各大公司间兴起，前端自立门户，独立发展。前端程序员们翻身的机会来了。</p>
+</li>
+</ul>
+<ul>
+<li><p>然而此时，很多本不该被做成SPA的也被做成了SPA。但是，SPA应用存在种种问题，比如SEO，比如首屏加载速度，这让前端开发人员优化愁白了头。</p>
+</li>
+<li><p>随着Node.js的兴起，Javascript开始有能力运行在服务器端，这意味这有一种新的研发模式：Front-end UI layer 处理浏览器层的展现逻辑，Back-end UI layer 处理路由、模板、数据获取、cookie 等。通过 Node，Web Server 层也是 JavaScript 代码，这意味着部分代码可前后复用，需要 SEO 的场景可以在服务端同步渲染，由于异步请求太多导致的性能问题也可以通过服务端来缓解。前一种模式的不足，通过这种模式几乎都能完美解决掉。</p>
+</li>
+<li><p>Web 2.0时代最大的思想革命本质不是前后端分离，而是把网页当作独立的应用程序（app）。前后端分离只是实现这一新架构的必然结果。对程序而言指令和数据是分离的。HTTP GET拿到的不是渲染后的网页，而是一个由html和Javascript组成的app, 这个app以浏览器为虚拟机。装载和显示数据是app启动之后的运行逻辑。传统上app叫什么？叫Client，也就是前端。于是前后端就这么分离了，浏览器变成了app的运行环境，后端蜕化成了单纯的业务逻辑和数据接口。写Javascript不再是给网页添特效的小伎俩，而是正经的和写桌面应用程序一样的工程。于是我们看到了前端工程化，编译（转译），各种MVC/MVVM框架，依赖工具，等等。</p>
+</li>
+</ul>
+<h2 id="2、为什么要用服务器端渲染？"><a href="#2、为什么要用服务器端渲染？" class="headerlink" title="2、为什么要用服务器端渲染？"></a>2、为什么要用服务器端渲染？</h2><p>使用服务器端渲染，最主要的问题，其实就是为了<strong>解决SEO的问题</strong>。如果SPA应用也有良好的SEO，就不用服务器端渲染这么麻烦了。当然服务器端渲染能解决的首屏加载速度的问题也是原因之一。那么，SEO是什么呢？</p>
+<p>SEO（Search Engine Optimization），搜索引擎优化。比如谷歌、百度需要抓取你所发布的网站信息来进行自然排序，是通过爬虫进行的。</p>
+<p>如果你用的是spa应用，那可能body中除了一个id为app的节点，什么都没有。所以，我们需要让页面在服务器端就已经被渲染完成，传给客户端的时候已经是一个具有数据信息的静态html文档。</p>
+<p>另外，<strong>解决首屏加载时间长</strong>的问题。</p>
+<h2 id="3、动手实现服务端渲染（一）：环境初步搭建"><a href="#3、动手实现服务端渲染（一）：环境初步搭建" class="headerlink" title="3、动手实现服务端渲染（一）：环境初步搭建"></a>3、动手实现服务端渲染（一）：环境初步搭建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- src</span><br><span class="line">   -- containers</span><br><span class="line">      -- Home</span><br><span class="line">         index.js</span><br><span class="line">   index.js</span><br><span class="line">webpack.server.js</span><br><span class="line">.babelrc</span><br><span class="line">package.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.server.js</span></span><br><span class="line"><span class="comment">// 需要webpack去处理一些 ES6、react等语法问题</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    mode: <span class="string">"development"</span>,</span><br><span class="line">    target: <span class="string">"node"</span>,</span><br><span class="line">    entry: <span class="string">"./src/index.js"</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">"bundle.js"</span>,</span><br><span class="line">        path: path.resolve( __dirname , <span class="string">"bundle"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.js?$/</span>,</span><br><span class="line">                loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">                exclude: <span class="regexp">/node_modules/</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// .babelrc</span><br><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [</span><br><span class="line">    [</span><br><span class="line">      &quot;@babel/preset-env&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;@babel/preset-react&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="comment">// 启动一个简单的express服务器</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"><span class="keyword">const</span> Home = <span class="built_in">require</span>(<span class="string">'./containers/Home/index.js'</span>);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; res.send(<span class="string">'Hello World!'</span>))</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, () =&gt; <span class="built_in">console</span>.log(<span class="string">'Example app listening on port 3000!'</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Home/index.js</span></span><br><span class="line"><span class="comment">// 一个简单的react组件</span></span><br><span class="line"><span class="keyword">const</span> React = <span class="built_in">require</span>(<span class="string">"react"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Home = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;home&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">module.exports = &#123;</span></span><br><span class="line"><span class="regexp">    default: Home</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>运行命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">打包</span><br><span class="line">npm run build</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">执行</span><br><span class="line">npm run start</span><br></pre></td></tr></table></figure>
+<p>这里执行就连带服务器代码也编译执行了～～</p>
+<p><a href="https://gitee.com/zjj19970517/React_SSR/tree/master/ssr_1" target="_blank" rel="noopener">github地址</a></p>
+<ul>
+<li>打包的时候可能会报错：</li>
+</ul>
+<p><img src="https://img2018.cnblogs.com/blog/1532752/201812/1532752-20181205212149548-2059552419.jpg" alt></p>
+<p>使用 target: ‘node’ 意为加载核心模块时，不打包📦 node_modules 里面的模块。</p>
+<p>但实际上光靠target指定为node是不够的，还需要借助一项外部配置 webpack-node-externals， 它可以帮助我们在打包时忽略 node_modules ~</p>
+<p><a href="https://www.cnblogs.com/fanqshun/p/10073493.html" target="_blank" rel="noopener">Webpack打包时警告 - Critical dependency: the request of a dependency is an expression</a></p>
+<h2 id="4、动手实现服务端渲染（二）：显示react组件内容"><a href="#4、动手实现服务端渲染（二）：显示react组件内容" class="headerlink" title="4、动手实现服务端渲染（二）：显示react组件内容"></a>4、动手实现服务端渲染（二）：显示react组件内容</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// home/index.js</span></span><br><span class="line"><span class="comment">// 可以给用es6形式了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Home = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;home&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Home;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'./containers/Home/index.js'</span>; <span class="comment">// [3]</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>; <span class="comment">// [2]</span></span><br><span class="line"><span class="keyword">import</span> &#123; renderToString &#125; <span class="keyword">from</span> <span class="string">'react-dom/server'</span>; <span class="comment">// [1]</span></span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; res.send(</span><br><span class="line">    <span class="comment">// [4]</span></span><br><span class="line">    <span class="comment">// 这里是通过renderToString方法将我们的虚拟DOM渲染为了一个字符串返回给客户端。</span></span><br><span class="line">    <span class="comment">// 而我们之前使用的ReactDOM.render()则是将虚拟dom渲染为真实dom，插入一个几点中。</span></span><br><span class="line">    <span class="comment">// 所以正是因为虚拟dom，才让我们服务端渲染便的较为方便</span></span><br><span class="line">    renderToString(<span class="xml"><span class="tag">&lt;<span class="name">Home</span> /&gt;</span>)</span></span><br><span class="line"><span class="xml">))</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">app.listen(3000, () =&gt; console.log('Example app listening on port 3000!'))</span></span><br></pre></td></tr></table></figure>
+<p>我们再次编译运行之后，我们就能在页面看到home组建的内容了.</p>
+<h2 id="5、动手实现服务端渲染（三）：监听编译自动打包-服务器自动重启"><a href="#5、动手实现服务端渲染（三）：监听编译自动打包-服务器自动重启" class="headerlink" title="5、动手实现服务端渲染（三）：监听编译自动打包 + 服务器自动重启"></a>5、动手实现服务端渲染（三）：监听编译自动打包 + 服务器自动重启</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"ssr_2"</span>,</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="string">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="comment">// 需要 sudo cnpm install nodemon -g</span></span><br><span class="line">    <span class="string">"start"</span>: <span class="string">"nodemon --watch bundle --exec node \"./bundle/bundle.js\""</span>,</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"webpack --watch --config webpack.server.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"keywords"</span>: [],</span><br><span class="line">  <span class="string">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"@babel/core"</span>: <span class="string">"^7.4.4"</span>,</span><br><span class="line">    <span class="string">"@babel/preset-env"</span>: <span class="string">"^7.4.4"</span>,</span><br><span class="line">    <span class="string">"babel-loader"</span>: <span class="string">"^8.0.6"</span>,</span><br><span class="line">    <span class="string">"express"</span>: <span class="string">"^4.16.4"</span>,</span><br><span class="line">    <span class="string">"react"</span>: <span class="string">"^16.8.6"</span>,</span><br><span class="line">    <span class="string">"react-dom"</span>: <span class="string">"^16.8.6"</span>,</span><br><span class="line">    <span class="string">"webpack"</span>: <span class="string">"^4.31.0"</span>,</span><br><span class="line">    <span class="string">"webpack-node-externals"</span>: <span class="string">"^1.7.2"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"@babel/preset-react"</span>: <span class="string">"^7.0.0"</span>,</span><br><span class="line">    <span class="string">"webpack-cli"</span>: <span class="string">"^3.3.2"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6、动手实现服务端渲染（四）：使用一条命令去并行执行多个命令"><a href="#6、动手实现服务端渲染（四）：使用一条命令去并行执行多个命令" class="headerlink" title="6、动手实现服务端渲染（四）：使用一条命令去并行执行多个命令"></a>6、动手实现服务端渲染（四）：使用一条命令去并行执行多个命令</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"ssr_2"</span>,</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="string">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="comment">// sudo cnpm install npm-run-all -g</span></span><br><span class="line">    <span class="string">"dev"</span>: <span class="string">"npm-run-all --parallel dev:**"</span>,</span><br><span class="line">    <span class="string">"dev:start"</span>: <span class="string">"nodemon --watch bundle --exec node \"./bundle/bundle.js\""</span>,</span><br><span class="line">    <span class="string">"dev:build"</span>: <span class="string">"webpack --watch --config webpack.server.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"keywords"</span>: [],</span><br><span class="line">  <span class="string">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="string">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"@babel/core"</span>: <span class="string">"^7.4.4"</span>,</span><br><span class="line">    <span class="string">"@babel/preset-env"</span>: <span class="string">"^7.4.4"</span>,</span><br><span class="line">    <span class="string">"babel-loader"</span>: <span class="string">"^8.0.6"</span>,</span><br><span class="line">    <span class="string">"express"</span>: <span class="string">"^4.16.4"</span>,</span><br><span class="line">    <span class="string">"react"</span>: <span class="string">"^16.8.6"</span>,</span><br><span class="line">    <span class="string">"react-dom"</span>: <span class="string">"^16.8.6"</span>,</span><br><span class="line">    <span class="string">"webpack"</span>: <span class="string">"^4.31.0"</span>,</span><br><span class="line">    <span class="string">"webpack-node-externals"</span>: <span class="string">"^1.7.2"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"@babel/preset-react"</span>: <span class="string">"^7.0.0"</span>,</span><br><span class="line">    <span class="string">"webpack-cli"</span>: <span class="string">"^3.3.2"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="7、动手实现服务端渲染（五）：认识同构"><a href="#7、动手实现服务端渲染（五）：认识同构" class="headerlink" title="7、动手实现服务端渲染（五）：认识同构"></a>7、动手实现服务端渲染（五）：认识同构</h2><p>上面我们的代码中如果我们添加了点击事件，我们会发现在页面中我们并不能点击，这是因为renderToString只返回了字符串回去，这样显然是不行的。</p>
+<p>同构：我们可以理解为是：一套react代码在服务器执行一遍，然后再去客户端执行一遍。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'./containers/Home/index.js'</span>;</span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; renderToString &#125; <span class="keyword">from</span> <span class="string">'react-dom/server'</span>;</span><br><span class="line">app.use(express.static(<span class="string">'public'</span>)); <span class="comment">//静态资源处理 [1]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> HomeContent = renderToString(<span class="xml"><span class="tag">&lt;<span class="name">Home</span> /&gt;</span>);</span></span><br><span class="line"><span class="xml">app.get('/', (req, res) =&gt; res.send(</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    // 这里是通过renderToString方法将我们的虚拟DOM渲染为了一个字符串返回给客户端。</span></span><br><span class="line"><span class="xml">    // 而我们之前使用的ReactDOM.render()则是将虚拟dom渲染为真实dom，插入一个几点中。</span></span><br><span class="line"><span class="xml">    `</span></span><br><span class="line"><span class="xml">        <span class="meta">&lt;!DOCTYPE html&gt;</span></span></span><br><span class="line">        &lt;html lang="en"&gt;</span><br><span class="line">        &lt;head&gt;</span><br><span class="line">          &lt;meta charset="UTF-8"&gt;</span><br><span class="line">          &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span><br><span class="line">          &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;</span><br><span class="line">          &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">        &lt;/head&gt;</span><br><span class="line">        &lt;body&gt;</span><br><span class="line">          $&#123;HomeContent&#125;</span><br><span class="line">          // [2]</span><br><span class="line">          &lt;script src="/index.js"&gt;&lt;/script&gt;</span><br><span class="line">        &lt;/body&gt;</span><br><span class="line">        &lt;/html&gt;</span><br><span class="line">    `</span><br><span class="line">))</span><br><span class="line"></span><br><span class="line">app.listen(3000, () =&gt; console.log('Example app listening on port 3000!'))</span><br></pre></td></tr></table></figure>
+<p>这样我们就可以在客户端执行脚本了。</p>
+<h2 id="8、动手实现服务端渲染（六）：实现一个简单的同构"><a href="#8、动手实现服务端渲染（六）：实现一个简单的同构" class="headerlink" title="8、动手实现服务端渲染（六）：实现一个简单的同构"></a>8、动手实现服务端渲染（六）：实现一个简单的同构</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// client/index.js</span></span><br><span class="line"><span class="comment">// 用于客户端的处理</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span>  <span class="string">'react-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'../containers/Home/index'</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.hydrate(<span class="xml"><span class="tag">&lt;<span class="name">Home</span>/&gt;</span></span> , <span class="built_in">document</span>.getElementById(<span class="string">"root"</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.client.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    mode: <span class="string">"development"</span>,</span><br><span class="line">    entry: <span class="string">"./src/client/index.js"</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">"index.js"</span>,</span><br><span class="line">        <span class="comment">// 导出到 public 下面</span></span><br><span class="line">        path: path.resolve( __dirname , <span class="string">"public"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.js?$/</span>,</span><br><span class="line">                loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">                exclude: <span class="regexp">/node_modules/</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"dev"</span>: <span class="string">"npm-run-all --parallel dev:**"</span>,</span><br><span class="line"><span class="string">"dev:start"</span>: <span class="string">"nodemon --watch bundle --exec node \"./bundle/bundle.js\""</span>,</span><br><span class="line"><span class="string">"dev:build:server"</span>: <span class="string">"webpack --watch --config webpack.server.js"</span>,</span><br><span class="line"><span class="string">"dev:build:client"</span>: <span class="string">"webpack --watch --config webpack.client.js"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// home/index.js</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增点击事件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Home</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    click() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'------'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    render () &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;p&gt;hello&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">                &lt;button onClick=&#123;this.click&#125;&gt;点击&lt;/</span>button&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>重启项目以后，我们可以看到点击效果起作用了。</p>
+<h2 id="8、动手实现服务端渲染（七）：整理服务端渲染实现原理"><a href="#8、动手实现服务端渲染（七）：整理服务端渲染实现原理" class="headerlink" title="8、动手实现服务端渲染（七）：整理服务端渲染实现原理"></a>8、动手实现服务端渲染（七）：整理服务端渲染实现原理</h2><p><img src="/react_ssr.jpg" alt></p>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 张锦杰 <br>
+        
+        原文链接 : <a href>http://yoursite.com/2019/05/15/server-SSR-1/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qzone, qq, weibo, wechat, douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">知识 & 情怀 | 二者兼得</p>
+  
+  <button id="reward-btn">
+    
+    <span>投食</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src alt="微信扫一扫, 向我投食">
+        <p class="qrcode-meta">微信扫一扫, 向我投食</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src alt="支付宝扫一扫, 向我投食">
+        <p class="qrcode-meta">支付宝扫一扫, 向我投食</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/SSR/">
+              #SSR
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/04/26/springMvc-1/" target="_self">springMVC 笔记</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2019/05/15/1/" target="_self"></a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz",
+      appKey: "WaR7nrzhliHj9aVwdQzkdlGd",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz", "WaR7nrzhliHj9aVwdQzkdlGd");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
+</div>
+
+
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
+    
+  </p>
+</footer>
+
+
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2019, 3, 7).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
+</html>
