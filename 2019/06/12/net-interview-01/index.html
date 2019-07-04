@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="张锦杰">
+  
+  
+  
+  <title>Meils 的 Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="网络,面试,网络,">
+  
+
+  <script>
+    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script>
+
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">张锦杰 的 Blog</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a href="/" target="_self">
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/" target="_self">
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/" target="_self">
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/" target="_self">
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          
+            <a href="/friends/" target="_self">
+              友链
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path>
+          
+            <a href="javascript:void(0);" v-else>抓到我</a>
+            <ul class="nav-menu--dropdown">
+              
+                <li>
+                  <a href="https://github.com/zjj1392372716" target="_blank">
+                    Github
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://juejin.im/user/5a1cbb46518825592c07d5f6" target="_blank">
+                    掘金
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://segmentfault.com/u/guchengshaonian_5a56fe95f2c32" target="_blank">
+                    思否
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>计算机网络之前端必备</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-06-12
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/网络/">
+            网络
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="net-interview-01"></span>
+      </span>
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h2 id="一、计算机网络TCP"><a href="#一、计算机网络TCP" class="headerlink" title="一、计算机网络TCP"></a>一、计算机网络TCP</h2><blockquote>
+<p>众所周知：TCP是一种可靠传输的协议。面向字节流、全双工通信、可靠、面向连接。</p>
+</blockquote>
+<p><strong>报文段格式</strong></p>
+<p>TCP虽然是面向字节流的，但是他的基本传输单元确实报文段。报文段 = 首部 + 数据部分。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b4fcf6f0b6546c?w=1000&amp;h=563&amp;f=webp&amp;s=17422" alt></p>
+<p>首部字段中有几个字段的意义非常的重要，直接体现该段的功能。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b4fcf6f0af31dc?w=808&amp;h=360&amp;f=webp&amp;s=17124" alt></p>
+<h3 id="1、实现无差错传输的解决方案"><a href="#1、实现无差错传输的解决方案" class="headerlink" title="1、实现无差错传输的解决方案"></a>1、实现无差错传输的解决方案</h3><blockquote>
+<p>无差错传输是其最大特点，也是最难实现之处。</p>
+</blockquote>
+<p><strong>基本思想</strong></p>
+<ul>
+<li>当我们传输出错的时候，要求重传。</li>
+<li>当我们接受方来不及接收的时候，我们可以适当减少发送的速率和发送的数量。</li>
+</ul>
+<p><strong>解决办法</strong></p>
+<ul>
+<li>重传机制（自动重传请求协议ARQ）</li>
+<li>流量控制和拥塞控制</li>
+</ul>
+<p>这也是我们学习TCP最为重要的东西，我们需了解TCP的可靠传输原理。</p>
+<h4 id="方法一：-自动重传请求协议ARQ"><a href="#方法一：-自动重传请求协议ARQ" class="headerlink" title="方法一： 自动重传请求协议ARQ"></a>方法一： 自动重传请求协议ARQ</h4><p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b4fd92fc90b9bf?w=1906&amp;h=896&amp;f=png&amp;s=552355" alt></p>
+<blockquote>
+<p>停止 —— 等待 ARQ</p>
+</blockquote>
+<p>所谓停止等待协议就是每发送完一组数据后，等待对方确认并且收到确认后，再发送下一组数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">发送数据，收到数据，发送确认，收到确认。</span><br></pre></td></tr></table></figure></p>
+<p><strong>无差错传输</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/20/169991ee6c7fb62d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
+<p>发送方发送分组,接收方在规定时间内收到,并且回复确认.发送方再次发送.这是最为理想的情况，每次发送都在接收到上一次的确认回复后再次发送。</p>
+<p><strong>传输差错</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/20/16999204234ec7d4?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
+<p>传输过程中某一条发生了丢失，导致在一定时间内收不到确认回复，当超过定时器设置的时间之后，就会重新发送上一条数据。</p>
+<p><strong>确认丢失</strong></p>
+<p>上面我们说了发送时机丢失的情况，接下来我们看一下确认阶段丢失的情况：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/20/16999242308dd60d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
+<p>A发送数据，B收到后发送确认消息，但是确认消息途中丢失了，A并不知道B是否收到，超过重传时间之后，就会重新发送数据，B接收到之后发现是重复发送，则丢弃该次发送的数据，重新发送确认信息。</p>
+<p><strong>确认迟到</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/20/1699929a90379a15?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
+<p>A发送M1消息，B收到并发送确认。在超时时间内没有收到确认消息，A重传M1消息，B仍然收到并继续发送确认消息（B收到了2份M1）。此时A收到了B第二次发送的确认消息。接着发送其他数据。过了一会，A收到了B第一次发送的对M1的确认消息（A也收到了2份确认消息）。处理如下：<br>A丢弃重复确认。<br>B丢弃重复信息。</p>
+<blockquote>
+<p>连续ARQ协议</p>
+</blockquote>
+<p>这是TCP的一个精华之所在，这里我们还需要知道滑动窗口协议的概念。</p>
+<p><strong>认识滑动窗口协议</strong></p>
+<p>首先我们来认识滑动窗口协议。其中包括了两个窗口，一个是<strong>发送窗口</strong>、一个是<strong>接收窗口</strong>。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b500890dd59036?w=434&amp;h=218&amp;f=png&amp;s=26183" alt></p>
+<p><strong>工作原理</strong></p>
+<blockquote>
+<p>发送方每收到一个确认，就把发送窗口向前滑动一个分组的位置。接收方一般采用<strong>累积确认</strong>的方式，对按序到达的最后一个分组发送确认。也就是说接收方不必对收到的分组逐个发送确认。而是对按序到达的最后一个发送确认。发送方收到确认信息后，认为之前该信号之前的已经发送完毕，向前移动发送窗口至该信号，继续发送。</p>
+</blockquote>
+<p>通俗来讲：发送方发送了5条消息，中间第三条丢失（3号），这时接收方只能对前两个发送确认（发送确认2）。发送方无法知道后三个分组的下落，而只好把后三个全部重传一次。</p>
+<p>他当然也有自己的优缺点。优点是：容易实现，即时确认丢失也不必重传。但缺点是不能向发送方反映出接收方已经正确收到的所有分组信息。</p>
+<p>一个数据报文段的状态可以分为四种：<br><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b4fe435885be55?w=895&amp;h=281&amp;f=png&amp;s=109028" alt></p>
+<blockquote>
+<p>停止等待ARQ VS 连续ARQ</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b4fdcd74f13680?w=758&amp;h=478&amp;f=png&amp;s=28176" alt></p>
+<p>通过下图分析，我们可以看出，停止等待协议的信道利用率明显过低。使用连续的ARQ协议可以大大的提高信道利用率。</p>
+<h4 id="方法二：-流量控制-amp-amp-拥塞控制"><a href="#方法二：-流量控制-amp-amp-拥塞控制" class="headerlink" title="方法二： 流量控制 &amp;&amp; 拥塞控制"></a>方法二： 流量控制 &amp;&amp; 拥塞控制</h4><p><strong>流量控制</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b5013be2c53795?w=1402&amp;h=726&amp;f=png&amp;s=304140" alt></p>
+<p>当TCP连接建立之后，接收方会告诉发送方自己的接收窗口大小，从而控制发送方窗口。</p>
+<p>如下是一个调整发送速率的例子：<br><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b50155117d6beb?w=783&amp;h=647&amp;f=png&amp;s=305765" alt></p>
+<p><strong>拥塞控制</strong></p>
+<blockquote>
+<p>防止过多的数据注入网络，导致网络拥挤，路由器、链路过载等情况。</p>
+</blockquote>
+<ul>
+<li>与流量控制的区别：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:center">范围</th>
+<th style="text-align:center">面向对象</th>
+<th style="text-align:center">效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>流量控制</td>
+<td style="text-align:center">点对点，端对端</td>
+<td style="text-align:center">发送方</td>
+<td style="text-align:center">控制发送速率</td>
+</tr>
+<tr>
+<td>拥塞控制</td>
+<td style="text-align:center">全局性</td>
+<td style="text-align:center">整个网络</td>
+<td style="text-align:center">防止过多的数据注入网络</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>具体有两种解决方案：慢开始 + 拥塞避免， 快重传 + 快恢复。</p>
+</blockquote>
+<p><strong>（1）慢开始 + 拥塞避免</strong></p>
+<ul>
+<li>拥塞窗口</li>
+</ul>
+<p>为了防止拥塞，TCP要求发送方维持一个拥塞窗口cwnd。拥塞窗口的值取决于网络拥塞程度，并且动态变化着，发送方根据拥塞窗口和接收窗口来取最小值为发送窗口的大小。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b50708cd8b14ac?w=891&amp;h=953&amp;f=png&amp;s=506728" alt></p>
+<ul>
+<li>慢开始</li>
+</ul>
+<p>首先初始化一个慢开始门限ssthresh。</p>
+<p>【阶段1 =&gt; 阶段2】 ： 采用慢开始算法： 当开始发送数据的时候，从小到大一次递增。从最开始的cwnd = 1.每经过一次就翻一倍。因此是 1、2、4、8、16…;直到 cwnd &gt;= ssthresh。</p>
+<ul>
+<li>拥塞控制</li>
+</ul>
+<p>【阶段2 =&gt; 阶段3】 ：采用拥塞避免算法。（加法增大）<br>降低增长速度，每经过一个往返时间RTT，发送方的拥塞窗口（cwnd）加1。直到遇到网络拥塞。</p>
+<p>【阶段3 =&gt; 阶段4】：采用乘法减少。<br>当遇到网络拥塞的时候，立马将cwnd设置为1.将ssthresh设置为发生拥塞是拥塞窗口的一半。</p>
+<p>【阶段4 =&gt; 阶段5】：重新执行慢开始算法。</p>
+<p><strong>（2）快重传 + 快恢复</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b50797d2df5390?w=1011&amp;h=620&amp;f=png&amp;s=441016" alt></p>
+<p>首先初始化一个慢开始门限ssthresh。</p>
+<p>【阶段1 =&gt; 阶段2】 ： 采用慢开始算法： 当开始发送数据的时候，从小到大一次递增。从最开始的cwnd = 1.每经过一次就翻一倍。因此是 1、2、4、8、16…;直到 cwnd &gt;= ssthresh。</p>
+<p>【阶段2 =&gt; 阶段3】 ：采用拥塞避免算法。（加法增大）<br>降低增长速度，每经过一个往返时间RTT，发送方的拥塞窗口（cwnd）加1。直到遇到网络拥塞。</p>
+<p>【阶段3 =&gt; 阶段4】 ：快重传 + 快恢复<br>当发生拥塞的时候，快重传算法首先要求接收方每收到一个失序的报文段后就立即发出重复确认。这样做可以让发送方及早知道有报文段没有到达接收方。发送方只要一连收到三个重复确认就应当立即重传对方尚未收到的报文段。立马开始重新传输。这意味这不是丢失了重传计时器，而是加快了反应。<br>同时将ssthresh设置为拥塞窗口的一半，cwnd也设置为一半。</p>
+<p>【阶段4 =&gt; 阶段5】：拥塞控制<br>每经过一个往返时间RTT，发送方的拥塞窗口（cwnd）加1。直到遇到网络拥塞。</p>
+<ul>
+<li>快重传</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b5080781b5195c?w=518&amp;h=537&amp;f=png&amp;s=244691" alt></p>
+<h3 id="2、TCP连接与释放"><a href="#2、TCP连接与释放" class="headerlink" title="2、TCP连接与释放"></a>2、TCP连接与释放</h3><p><strong>（1）建立连接的过程</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b509c99b3aaac0?w=880&amp;h=668&amp;f=png&amp;s=146799" alt></p>
+<p>建立的过程我们常称为三次握手～</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SYN = 1 表示需要对方回复确认</span><br><span class="line">ACK = 1 表示该条信息为确认信息</span><br><span class="line">seq 表示当前的序号</span><br><span class="line">ack 表示期望下次从哪开始发送</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第一次：喂，你能听到我说话吗？ （将初始序号发送过去）SYN = 1， seq = x</span><br><span class="line">第二次：嗯，听得到，你能听到我说话吗？ （回复确认）SYN = 1，ACK = 1，seq = x + 1， seq = y</span><br><span class="line">第三次：嗯，我也听得到，我要开始发送数据了～（回复确认）ACK = 1， seq = x + 1， ack = y + 1</span><br></pre></td></tr></table></figure>
+<p><strong>（2）连接释放的过程</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b50ec24725b316?w=950&amp;h=843&amp;f=png&amp;s=203236" alt></p>
+<p>四次挥手：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SYN = 1 表示需要对方回复确认</span><br><span class="line">ACK = 1 表示该条信息为确认信息</span><br><span class="line">seq 表示当前的序号</span><br><span class="line">ack 表示期望下次从哪开始发送</span><br><span class="line">FIN 表示终止的信号，表示自己这方要准备断开连接了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">第一次：喂，我要关闭连接了～ FIN = 1 seq = x</span><br><span class="line">第二次：好，我还有没发送完的东西，等会 ACK = 1，seq = y，ack = x + 1</span><br><span class="line">第三次：好了，我发送完毕了，我马上要断开连接了哦～ FIN = 1；ACK = 1；seq  = w，ack = x + 1；</span><br><span class="line">第四次：ok，拜拜，合作愉快～～  ACK = 1；seq = x + 1， ack = w + 1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里的 seq，ack 是用来协商发送数据的开始序列的，当连接建立之后，发送方从那个序号开始发送，接收方就从那个序号开始接收，为了确保准确无误的接收。</p>
+</blockquote>
+<h2 id="二、计算机网络UDP-（用户数据报协议）"><a href="#二、计算机网络UDP-（用户数据报协议）" class="headerlink" title="二、计算机网络UDP （用户数据报协议）"></a>二、计算机网络UDP （用户数据报协议）</h2><blockquote>
+<p>UDP：面向无连接、面向报文、尽最大能力的交付，属于不可靠传输、支持一对一、一对多、多对多通信。</p>
+</blockquote>
+<ul>
+<li>TCP vs UDP</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b5085233001b24?w=860&amp;h=220&amp;f=png&amp;s=55040" alt></p>
+<h2 id="三、计算机网络HTTP"><a href="#三、计算机网络HTTP" class="headerlink" title="三、计算机网络HTTP"></a>三、计算机网络HTTP</h2><h3 id="1、计算机网络体系结构"><a href="#1、计算机网络体系结构" class="headerlink" title="1、计算机网络体系结构"></a>1、计算机网络体系结构</h3><blockquote>
+<p>计算机网络体系结构分为3种：<code>OSI体系结构</code>、<code>TCP / IP体系结构</code>、<code>五层体系结构</code>.</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b5101511588eed?w=620&amp;h=395&amp;f=png&amp;s=60745" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OSI是7层体系结构，</span><br><span class="line">TCP/IP 是4层体系结构（网络接口层、网络层、传输层、应用层）</span><br><span class="line">五层网络体系结构则把网络接口层分为了物理层和数据链路层。</span><br></pre></td></tr></table></figure>
+<p>其实我们最关注的还是传输层和应用层。</p>
+<h3 id="2、HTTP协议的基本知识点"><a href="#2、HTTP协议的基本知识点" class="headerlink" title="2、HTTP协议的基本知识点"></a>2、HTTP协议的基本知识点</h3><p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b510f026aebd11?w=1364&amp;h=500&amp;f=png&amp;s=272270" alt></p>
+<p>HTTP协议通常承载与TCP协议之上；有时候也承载与TLS和SSL之上，此时变成了HTTPS协议。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b51104294e9926?w=882&amp;h=610&amp;f=png&amp;s=64496" alt></p>
+<h3 id="3、工作方式"><a href="#3、工作方式" class="headerlink" title="3、工作方式"></a>3、工作方式</h3><ul>
+<li>HTTP协议采用 请求 / 响应 的工作方式</li>
+<li>具体工作流程如下：</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b51114a52c3090?w=280&amp;h=366&amp;f=png&amp;s=45235" alt></p>
+<h3 id="4、HTTP报文"><a href="#4、HTTP报文" class="headerlink" title="4、HTTP报文"></a>4、HTTP报文</h3><p><strong>请求报文</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b513ff9c599b88?w=1648&amp;h=792&amp;f=png&amp;s=484055" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b5144313faaed2?w=1196&amp;h=574&amp;f=png&amp;s=168733" alt></p>
+<p><strong>响应报文</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b51477c7abed46?w=1460&amp;h=774&amp;f=png&amp;s=402379" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b5149d60bc0668?w=1170&amp;h=556&amp;f=png&amp;s=171272" alt></p>
+<blockquote>
+<p>注意：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请求报文的回车换行符是必须的，请求行和状态行的空格也是必须的。</span><br></pre></td></tr></table></figure>
+<h3 id="5、HTTP请求方式"><a href="#5、HTTP请求方式" class="headerlink" title="5、HTTP请求方式"></a>5、HTTP请求方式</h3><p><strong>GET</strong></p>
+<p>从指定服务器获取数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用该方法后，查询字段会拼接到url末尾</span><br><span class="line">请求字符串有长度限制</span><br><span class="line">get方式的请求路径能被浏览器保存</span><br><span class="line">get方法主要以获取数据</span><br><span class="line">get方法不应该在处理铭感信息时候使用</span><br></pre></td></tr></table></figure>
+<p><strong>POST</strong></p>
+<p>提交指定数据给服务器处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST发送的请求。包含的数据字段会保存在请求体中，发送给服务器</span><br><span class="line">post请求的数据没有长度大小限制</span><br><span class="line">请求路径不能被保存为书签</span><br><span class="line">POST请求不会保存在浏览器浏览记录中</span><br></pre></td></tr></table></figure>
+<p><strong>DELETE</strong></p>
+<p>按请求URL来删除指定的文件</p>
+<p><strong>PUT</strong></p>
+<p>将文件保存到url指定的位置。</p>
+<p><strong>HEAD</strong></p>
+<p>获取报文首部。同GET方式类似，但是不返回主体内容，只是返回首部信息，用来判断URI的有效性、资源更新的时间等。</p>
+<p><strong>OPTIONS</strong></p>
+<p>询问支持的方法，询问某个URI所支持的请求方式。<br>返回如：Allow: GET,POST,HEAD,DELETE</p>
+<h3 id="5、HTTP请求首部"><a href="#5、HTTP请求首部" class="headerlink" title="5、HTTP请求首部"></a>5、HTTP请求首部</h3><p>HTTP首部是构成HTTP报文的重要内容，在客户端和服务器之间的通信过程中，无论是请求还是响应都需要请求首部，请求首部在传递的过程中起着传递额外信息的作用。（比如：主体大小、编码方式、域、认证信息等）</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b55d87a0099840?w=1336&amp;h=628&amp;f=png&amp;s=241293" alt></p>
+<p><strong>（1）通用首部字段</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th style="text-align:left">解释</th>
+<th style="text-align:center">书写格式 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cache-Control</td>
+<td style="text-align:left">控制缓冲机制,具体指令看下图，（可用于请求和响应）</td>
+<td style="text-align:center"><code>Cache-Control: private, max-age=0, no-cache</code></td>
+</tr>
+<tr>
+<td>Date</td>
+<td style="text-align:left">表示HTTP报文创建时间</td>
+<td style="text-align:center"><code>Date:Fri, 19 Oct 2018 09:45:13 GMT</code></td>
+</tr>
+<tr>
+<td>Connection</td>
+<td style="text-align:left">控制代理不再转发的字段，管理持久连接。如Connection:Upgrade，那么在经过代理后，Upgrade首部字段将不会被发送至服务器。同时可以管理持久连接，Connection:Keep-Alive表示开启长连接，Connection: close表示关闭本次连接.HTTP/1.1 版本的默认连接都是持久连接。为此，客户端会在持 久连接上连续发送请求。当服务器端想明确断开连接时，则指定 Connection 首部字段的值为 Close。</td>
+<td style="text-align:center"><code>Connection:Upgrade； Connection:Keep-Alive； Connection:close；</code></td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td style="text-align:left">Pragma 是 HTTP/1.1 之前版本的历史遗留字段，仅作为与 HTTP/1.0 的向后兼容而定义。</td>
+<td style="text-align:center"><code>Pragma: no-cache</code></td>
+</tr>
+<tr>
+<td>Transfer-Encoding</td>
+<td style="text-align:left">规定了传输报文主体采用的编码方式</td>
+<td style="text-align:center"><code>Transfer-Encoding: chunked</code></td>
+</tr>
+<tr>
+<td>Via</td>
+<td style="text-align:left">没经过一个代理或者网关都会往该字段里面添加服务器信息，如下图</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>下图是上诉首部字段的图解～～</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b55e174ed3f719?w=1446&amp;h=800&amp;f=png&amp;s=358920" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b56393ac142c3f?w=1552&amp;h=916&amp;f=png&amp;s=487628" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b56491417db4b3?w=1488&amp;h=746&amp;f=png&amp;s=603237" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b5648551854820?w=1460&amp;h=772&amp;f=png&amp;s=565661" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b5650d3ca35b53?w=1572&amp;h=1010&amp;f=png&amp;s=835356" alt></p>
+<p><strong>（2）请求首部字段</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th style="text-align:left">解释</th>
+<th style="text-align:center">书写格式 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td style="text-align:left">告诉服务器这边的用户代理能够处理的媒体类型以及优先级，使用q表示优先级，q默认是1，取值范围是0-1，1为最高</td>
+<td style="text-align:center"><code>Accept: text/html,application/xhtml+xml,application/xml;q=0.</code></td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td style="text-align:left">通知服务器，用户代理这边可以接受的字符集，字符集的优先顺序，q来表示优先级别</td>
+<td style="text-align:center"><code>Accept-Charset: iso-8859-5, unicode-1-1;q=0.8</code></td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td style="text-align:left">用户代理支持的压缩方式</td>
+<td style="text-align:center"><code>Accept-Encoding: gzip, deflate</code></td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td style="text-align:left">通知服务器，用户代理支持的语言，q来表示优先级</td>
+<td style="text-align:center"><code>Accept-Language: zh-cn,zh;q=0.7,en-us,en;q=0.3</code></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td style="text-align:left">用来告知服务器，用户的代理认证信息</td>
+<td style="text-align:center"><code>Authorization: Basic dWVub3NlbjpwYXNzd29yZA==</code></td>
+</tr>
+<tr>
+<td>Expert</td>
+<td style="text-align:left">告知服务器，期望出现某种行为，比如：首先，客户端先发送了一个请求，这个请求的header中包含了一个属性expect: 100-continue。这种情况一般出现于上传大容量body或者是需要验证的时候。这时服务器会读取请求的header并返回一个100 continue的响应，如果服务器可以提供这项服务的话。客户端再将http请求发送回去。然后服务器会读取请求的body并且在成功后返回200状态码。</td>
+<td style="text-align:center"><code>Expect: 100-continue</code></td>
+</tr>
+<tr>
+<td>Host</td>
+<td style="text-align:left">告知服务器，所访问的资源在互联网中的主机名和端口（必须包含在首部内） 首部字段 Host 和以单台服务器分配多个域名的虚拟主机的工作机制 有很密切的关联，这是首部字段 Host 必须存在的意义。</td>
+<td style="text-align:center">Host: xxx</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td style="text-align:left">发送浏览器的类别，型号</td>
+<td style="text-align:center"><code>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:13.0) Ge</code></td>
+</tr>
+<tr>
+<td>TE</td>
+<td style="text-align:left">告知服务器，客户端能够处理的响应的传输编码方式，以及相对优先级，与Accept-Encoding类似，但是该处用于传输</td>
+<td style="text-align:center"><code>TE: gzip, deflate;q=0.5</code></td>
+</tr>
+<tr>
+<td>Referer</td>
+<td style="text-align:left">指明我们当前的请求是从哪个web页面发起的</td>
+<td style="text-align:center">从首页发起 <code>Referer: https://m.suning.com/</code>  </td>
+</tr>
+<tr>
+<td>Range</td>
+<td style="text-align:left">告知服务器我要访问哪个范围内的资源</td>
+<td style="text-align:center"><code>Range: bytes=5001-10000</code></td>
+</tr>
+</tbody>
+</table>
+<p>下面我们再来自己分析一下请求首部中的带有if-的条件首部：</p>
+<blockquote>
+<p>形如 If-xxx 这种样式的请求首部字段，都可称为条件请求。服务器接 收到附带条件的请求后，只有判断指定条件为真时，才会执行请求。</p>
+</blockquote>
+<ul>
+<li>If-Match</li>
+</ul>
+<p>If-Match会传递一个ETag值过去，如果要访问的这个资源，当前的ETag正好是这个，那么就返回，如果对不上，那么就返回 <code>412 Precondition Failed</code>(客户端请求条件错误)。如果值是 * ，则表示只要资源存在即可。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/16/16b5ef1eabb94187?w=1576&amp;h=662&amp;f=png&amp;s=597277" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/16/16b5ef2d648a74cd?w=1556&amp;h=606&amp;f=png&amp;s=534830" alt></p>
+<ul>
+<li>If-Modified-Since</li>
+</ul>
+<p>修改时间 &gt; 传入的时间</p>
+<p>如果在 If-Modified-Since指定的日期之后资源发生了更新，那么就返回响应，否者不会返回。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/16/16b5ef7b06904ce1?w=1536&amp;h=1306&amp;f=png&amp;s=1124734" alt></p>
+<ul>
+<li>If-None-Modified</li>
+</ul>
+<p>与 If-Match 首部字段的作用相反,只有比对传入的Etag和最新的ETag不一致才会接受请求。如果为*，则只有不存在了才会接受请求。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/16/16b5ef8f2e5989d7?w=1612&amp;h=584&amp;f=png&amp;s=513622" alt></p>
+<ul>
+<li>If-Unmodified-Since</li>
+</ul>
+<p>修改时间 &lt; 传入的时间</p>
+<p>首部字段 If-Unmodified-Since 和首部字段 If-Modified-Since 的作用相 反。它的作用的是告知服务器，指定的请求资源只有在字段值内指定 的日期时间之后，未发生更新的情况下，才能处理请求。</p>
+<ul>
+<li>If-Range</li>
+</ul>
+<p>如果If-Range的值与服务器的ETag或更新时间一致，那么可以使用下方的Range字段，来返回相应范围的内容。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/16/16b5f16a55f3d2c7?w=1566&amp;h=872&amp;f=png&amp;s=781760" alt></p>
+<p><strong>（3）响应首部字段</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th style="text-align:left">解释</th>
+<th style="text-align:center">书写格式 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept-Ranges</td>
+<td style="text-align:left">告知客户端，我服务器可以处理范围请求</td>
+<td style="text-align:center"><code>Accept-Ranges: bytes</code></td>
+</tr>
+<tr>
+<td>ETag</td>
+<td style="text-align:left">首部字段 ETag 能告知客户端实体标识。它是一种可将资源以字符串 形式做唯一性标识的方式。服务器会为每份资源分配对应的 ETag 值。</td>
+<td style="text-align:center">ETag: “82e22293907ce725faf67773957acd12”</td>
+</tr>
+<tr>
+<td>Location</td>
+<td style="text-align:left">以将响应接收方引导至某个与请求 URI 位置 不同的资源。</td>
+<td style="text-align:center"><code>Location: http://www.usagidesign.jp/sample.html</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>（4）实体首部字段</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th style="text-align:left">解释</th>
+<th style="text-align:center">书写格式 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allow</td>
+<td style="text-align:left">资源允许请求的方式</td>
+<td style="text-align:center">Allow:GET, HEAD。</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td style="text-align:left">资源过期的日期</td>
+<td style="text-align:center"><code>Expires:Fri, 20 Oct 2018 09:45:13 GMT</code></td>
+</tr>
+<tr>
+<td>Last-Modified</td>
+<td style="text-align:left">资源最后一次修改的时间</td>
+<td style="text-align:center">Last-Modified:Fri, 15 Oct 2018 09:45:13 GMT</td>
+</tr>
+<tr>
+<td>Content-Encoding, Content-Type, Content-Language, Content-Range</td>
+<td style="text-align:left">表示资源具体的信息</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>（5）Cookies相关</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th style="text-align:left">解释</th>
+<th style="text-align:center">书写格式 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Set-Cookie</td>
+<td style="text-align:left">服务端返回，用于设置Cookie</td>
+<td style="text-align:center"><code>Set-Cookie: status=enable; expires=Tue, 05 Jul 2011 07:26:31</code></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td style="text-align:left">服务器接收cookie值，由客户端发出</td>
+<td style="text-align:center"><code>Cookie: status=enable</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="6、HTTP状态码"><a href="#6、HTTP状态码" class="headerlink" title="6、HTTP状态码"></a>6、HTTP状态码</h3><p><img src="https://user-gold-cdn.xitu.io/2019/6/16/16b5f41f2434593a?w=960&amp;h=1244&amp;f=png&amp;s=705441" alt></p>
+<blockquote>
+<p>信息性状态码的介绍</p>
+</blockquote>
+<p><strong>100 Continue</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/17/16b646ac74bd3062?w=1090&amp;h=520&amp;f=png&amp;s=142332" alt></p>
+<p>100 状态码主要用于优化某些操作，比如客户端不知道服务端能否处理我们接下来要发送的这个实体主体，因此先发送一个Expert字段，并且客户端不能一直等待服务器的100Continue响应，超过一定返回客户端回自动发出该实体主体。如果服务器返回了417，说明了我们Expert字段无效，服务器无法理解。</p>
+<p><strong>101 Switching Protocols</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/17/16b64738fc7af07d?w=1154&amp;h=558&amp;f=png&amp;s=150263" alt></p>
+<p>Upgrade字段用于告诉服务端切换Http版本，如果可以服务端将返回101.</p>
+<blockquote>
+<p>成功性状态码的介绍</p>
+</blockquote>
+<p><strong>200 ok</strong></p>
+<p>请求成功，同时说明响应报文中含有实体内容。</p>
+<p><strong>201 Created</strong></p>
+<p>201 Created：请求已经被实现，而且有一个新的资源已经依据请求的需要而建立，且其URI已经随Location头信息返回或者在响应体了（比如put方式上传文件）。假如需要的资源无法及时建立的话，应当返回’202Accepted’。</p>
+<p><strong>202 Accepted</strong></p>
+<p>请求已被建立，但是服务器还未对其做任何处理。</p>
+<p><strong>204 Not Content</strong></p>
+<p>服务器成功处理了请求，但是并没有返回任何实体内容。（比如刷新表单）</p>
+<p><strong>205 Reset Content</strong></p>
+<p>告知浏览器清除当前页面html表单元素。</p>
+<p><strong>206 Partial Content</strong></p>
+<p>表示成功执行了一部分后者是Range请求。比如我们使用的迅雷，我们都是片段下载，我们可以控制暂停和执行。</p>
+<blockquote>
+<p>重定向状态码的介绍</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/17/16b64a00a236ca5b?w=1528&amp;h=782&amp;f=png&amp;s=350348" alt></p>
+<p><strong>300 Multiple Choices</strong></p>
+<p>多重选择，请求的资源可以包含多个位置信息，比如我们的页面可以有多个语言版本，默认会显示某个语言，用户可根据自己的情况去选择其他。</p>
+<p><strong>301 Moved Permanently</strong></p>
+<p>永久重定向。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。</p>
+<p><strong>302 Found</strong></p>
+<p>临时重定向。但资源只是临时被移动。客户端应继续使用原有URI访问。</p>
+<p><strong>303 See Other</strong></p>
+<p>查看其它地址。与301类似。其主要目的就是将POST响应定位到指定URI。后面还会说到一个307，它与301类似，我们下面做比较。</p>
+<p><strong>304 Not Modified</strong></p>
+<p>未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源，我们可以访问缓冲。</p>
+<p><strong>305 Use Proxy</strong></p>
+<p>表示我们所请求的资源需要代理才行。</p>
+<p><strong>307 Temporary Redirect</strong></p>
+<p>临时重定向。与303类似，场景：我们访问test.php,使用post请求发送数据，然后test做了处理让其重定向了一下，使用303让其重定向到test1.php。这时候我们想在test1中拿到请求数据，这时候我们发线拿不到的。但是如果我们把303改为307，那么就可以拿到数据。我们可以通过抓包工具发现，使用307之后，重定向的请求还是post，而使用303的重定向则是使用的get方式了。</p>
+<blockquote>
+<p>客户端错误状态码的介绍</p>
+</blockquote>
+<p><strong>400 Bad Request</strong></p>
+<p>客户端请求的语法错误，服务器无法理解</p>
+<p><strong>401 Unauthorized</strong></p>
+<p>请求要求用户身份验证。</p>
+<p><strong>403 Forbidden</strong></p>
+<p>客户端的请求被拒绝了。</p>
+<p><strong>404 Not Found</strong></p>
+<p>服务器无法根据客户端的请求找到资源（网页）。平时开发中出现这个，最多的原因就是URI写错了。</p>
+<p><strong>405 Method Not Allowed</strong></p>
+<p>客户端请求中的方法被禁止，请求方式不对应。</p>
+<blockquote>
+<p>服务器错误状态码</p>
+</blockquote>
+<p><strong>500 Internal Server Error</strong></p>
+<p>服务器内部错误。</p>
+<p><strong>501 Not Implemented</strong></p>
+<p>服务器无法正常完成请求。比如某种请求方式服务器不支持。</p>
+<p><strong>502 Bad Gateway</strong></p>
+<p>作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应</p>
+<h3 id="7、HTTP其他特点"><a href="#7、HTTP其他特点" class="headerlink" title="7、HTTP其他特点"></a>7、HTTP其他特点</h3><p><img src="https://user-gold-cdn.xitu.io/2019/6/16/16b5f4aa8fe32ce2?w=1536&amp;h=482&amp;f=png&amp;s=353213" alt></p>
+<h2 id="四、计算机网络HTTPS"><a href="#四、计算机网络HTTPS" class="headerlink" title="四、计算机网络HTTPS"></a>四、计算机网络HTTPS</h2><h2 id="五、Web安全"><a href="#五、Web安全" class="headerlink" title="五、Web安全"></a>五、Web安全</h2><h2 id="六、面试题集"><a href="#六、面试题集" class="headerlink" title="六、面试题集"></a>六、面试题集</h2><blockquote>
+<p><strong>TCP 协议如何保证可靠传输？</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>为什么TCP建立连接需三次握手？</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">因为在网络传输中是存在延迟的，有时候可能对方没收到，也可能发生了超时重传，</span><br><span class="line">所以三次握手才能最大程度上保证连接能够正确建立，不会造成死锁。</span><br><span class="line"></span><br><span class="line">就比如一种情况：</span><br><span class="line"></span><br><span class="line">A发送给B，但是途中延迟，超过了重传时间，这时候A发送了第二条到B，</span><br><span class="line">B收到后，正式开始AB通信，AB正常通信完毕，这时候上一次发送的数据过来了，</span><br><span class="line">B认为A又要连接了，就发送确认信号，但是A知道，这是上次发的，</span><br><span class="line">所以就不会给B发送数据了，B自作多情的在那等啊等。A一直不发，B一直等。</span><br><span class="line">这就导致了死锁发生。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>为什么TCP释放连接需四次挥手？</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">最后一次挥手是非常有必要的，因为只有这次确认信号收到了，</span><br><span class="line">服务器才知道自己可以真正的关闭了，上一次的消息客户端是确定收到了。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>为什么客户端关闭连接前要等待2MSL时间？（TIME—WAIT）</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1、为了保证服务器能接收到第四次分组数据，如果中途丢失了，</span><br><span class="line">那么服务器肯定会重新发送第三次的数据，</span><br><span class="line">那么客户端能够及时的再发送一次确认信号，保证服务器能准确接收到第四次握手信息</span><br><span class="line"></span><br><span class="line">2、同时也确保我们之前发送的延迟回来的信息能够全部被处理完。</span><br><span class="line">防止下一次连接时，出现上一次没处理的失效报文</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>在浏览器中输入url地址到页面的呈现都发生了什么？</strong></p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/17/16b659dfea31dbb6?w=1714&amp;h=558&amp;f=png&amp;s=387967" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">如果问到了这么一个过程，那么其实就是在考你HTTP事物流程。</span><br><span class="line"></span><br><span class="line">DNS域名解析拿到IP地址</span><br><span class="line">TCP三次握手建立HTTP连接</span><br><span class="line">客户端发送请求到服务器</span><br><span class="line">服务器处理请求并返回响应报文</span><br><span class="line">浏览器解析并渲染页面,同时请求加载静态资源</span><br><span class="line">TCP四次挥手断开连接</span><br></pre></td></tr></table></figure>
+<p><strong>DNS域名解析</strong></p>
+<p>在浏览器输入网址后，首先要经过域名解析，因为浏览器并不能直接通过域名找到对应的服务器，而是要通过 IP 地址。</p>
+<p>认识IP地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP地址标识了 每一个网络和每一台主机。</span><br></pre></td></tr></table></figure></p>
+<p>具体过程如下（如访问<a href="http://www.google.com）" target="_blank" rel="noopener">www.google.com）</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、首先浏览器去找自己的DNS缓冲，如果找到了直接返回，如果没找到进行下一步</span><br><span class="line">2、搜索操作系统自身的DNS缓冲，如果找到了直接返回，如果没找到进行下一步</span><br><span class="line">3、读取电脑hosts文件，如果该文件有配置，则直接读取返回，如果没找到进行下一步</span><br><span class="line">4、向本地配置的首选DNS服务器发起域名解析请求，如果它找到了直接返回，如果没有进行下一步，哎呀我也不清楚，我去问问根域名服务器吧。</span><br><span class="line">5、根域名服务器也不清楚，但是他知道com的域名服务器，于是说，你去问问com域名服务器吧</span><br><span class="line">6、于是来到了com顶级域名服务器，老哥，你知道www.google.com的IP地址吗？哎呀抱歉，我也不清楚，我知道google.com服务器的地方，你去问问他吧。</span><br><span class="line">7、辗转来到了google.com域名服务器这里，老哥你知道www.google.com的IP地址吗？哎呀，我还真知道，我告诉你啊，他的IP是xxxx</span><br><span class="line">8、我的麻叶终于拿到了，快告诉客户端吧，我还得把这个缓冲一下，不然下次还得找个半死。</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/19/16b6f81d75adb717?w=800&amp;h=518&amp;f=png&amp;s=234854" alt></p>
+<p><strong>DNS优化处理</strong></p>
+<ul>
+<li><p><strong>DNS负载均衡</strong>：DNS负载均衡技术的实现原理是在DNS服务器中为同一个主机名配置多个IP地址，在应答DNS查询时， DNS服务器对每个查询将以DNS文件中主机记录的IP地址按顺序返回不同的解析结果，将客户端的访问 引导到不同的机器上去，使得不同的客户端访问不同的服务器，从而达到负载均衡的目的。</p>
+</li>
+<li><p><strong>CDN加速</strong>：利用DNS的重定向技术，DNS服务器会返回一个跟 用户最接近的点的IP地址给用户，CDN节点的服务器负责响应用户的请求，提供所需的内容。</p>
+</li>
+</ul>
+<p><strong>浏览器解析渲染页面</strong></p>
+<blockquote>
+<p>我们来了解一下浏览器的渲染流程～～</p>
+</blockquote>
+<ul>
+<li><strong>浏览器的组成</strong></li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/19/16b6f8bce8f827d3?w=690&amp;h=384&amp;f=png&amp;s=167366" alt></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户界面    (User Interface)</td>
+<td style="text-align:left">包括地址栏、后退/前进按钮、书签目录等，也就是你所看到的除了用来显示你所请求页面的主窗口之外的其他部分</td>
+</tr>
+<tr>
+<td>浏览器引擎  (Browser Engine)</td>
+<td style="text-align:left">用来查询及操作渲染引擎的接口</td>
+</tr>
+<tr>
+<td>渲染引擎    (Rendering Engine)</td>
+<td style="text-align:left">用来显示请求的内容，例如，如果请求内容为html，它负责解析html及css，并将解析后的结果显示出来</td>
+</tr>
+<tr>
+<td>网络        (Networking)</td>
+<td style="text-align:left">用来完成网络调用，例如http请求，它具有平台无关的接口，可以在不同平台上工作</td>
+</tr>
+<tr>
+<td>JS解释器    (JS Interpreter)</td>
+<td style="text-align:left">用来解释执行JS代码</td>
+</tr>
+<tr>
+<td>UI后端      (UI Backend)</td>
+<td style="text-align:left">用来绘制类似组合选择框及对话框等基本组件，具有不特定于某个平台的通用接口，底层使用操作系统的用户接口</td>
+</tr>
+<tr>
+<td>数据存储    (DB Persistence)</td>
+<td style="text-align:left">属于持久层，浏览器需要在硬盘中保存类似cookie的各种数据，HTML5定义了web database技术，这是一种轻量级完整的客户端存储技术</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>总之浏览器由：用户界面、浏览器引擎、渲染引擎、网络、js解释器、UI后端、和数据持久层组成。下层为上层提供调用的接口和服务。</p>
+</blockquote>
+<ul>
+<li><strong>浏览器是多进程的</strong></li>
+</ul>
+<p>浏览器有一个主控进程，和一些其他的进程比如：插件进程、GPU进程、tab页面（浏览器渲染进程内核）。</p>
+<p>每种类型的插件对应一个进程，仅当使用该插件时才创建。GPU进程用于控制显卡硬件加速（3d绘制时非常需要）。每开启一个tab页面都会创建一个新的浏览器渲染进程，这使得每个tab页面互不影响，每个进程控制着当前tab页面的渲染，脚本执行和事件处理。多个空白tab会合并为一个进程。</p>
+<ul>
+<li><strong>多线程的浏览器内核</strong></li>
+</ul>
+<p>每一个tab页面都可以看作是一个浏览器内核，浏览器内核是多线程的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GUI线程：控制界面的显示</span><br><span class="line">JS引擎线程：脚本的执行</span><br><span class="line">网络请求线程</span><br><span class="line">事件触发线程</span><br><span class="line">定时器控制线程</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>JS是单线程的</strong></li>
+</ul>
+<p>我们平时所说的js单线程是指的是js引擎线程。Js引擎执行Js时只分了一个线程给他执行，也就是我们的js引擎线程。</p>
+<p>为什么js执行要单线程，如果多线程不是可以执行得快一点吗？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这个要回到Js历史了，布兰登·艾奇(Brendan Eich)老哥用10天创造js。当时js用来干嘛，简单的浏览器交互，验证，</span><br><span class="line">操作一下dom是吧。那把它设计成那么复杂干什么，而且如果多线程的话，</span><br><span class="line">操作dom会出现麻烦的事情，假设一个线程读取DOM节点数据的同时，</span><br><span class="line">另一个线程把那个DOM节点删了，呵呵。所以js一个线程就够了，也就是一步一步顺序运行下来。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>浏览器内核拿到内容后，渲染步骤大致可以分为以下几步：</strong></li>
+</ul>
+<p>1）HTML文档解析，构建DOM树。DOM树的构建是一个深度遍历的过程，当前节点的所有子节    点都构建完成以后，才会去构建当前节点的下一个兄弟节点。</p>
+<p>2）将CSS解析成CSSOM树（CSS Rule Tree）。遇到css样式如link标签或者style标签时开始解析css，构建样式树。HTML解析    构建和CSS的解析是相互独立的并不会造成冲突，因此我们通常将css样式放在head中，    让浏览器尽早解析css;</p>
+<p>3）当html的解析遇到script标签会怎样呢？<br>答案是停止DOM树的解析开始下载js。因为js是会阻塞html解析的，是阻塞资源。其原因在于js可能会改变html现有结构。例如有的节点是用js动态构建的，在这种情况下就会停止dom树的构建开始下载解析js。<br>脚本在文档的何处插入，就在何处执行。当 HTML 解析器遇到一个 script 标记时，它会暂停构建 DOM，将控制权移交给 JavaScript 引擎；等 JavaScript 引擎运行完毕，浏览器会从中断的地方恢复 DOM 构建。<br>而因此就会推迟页面首绘的时间。可以在首绘不需要js的情况下用async和defer实现异步加载。这样js就不会阻塞html的解析了。</p>
+<p>4）根据DOM树和CSSOM树，来构建Render Tree（渲染树）,注意渲染树，并不等于DOM树，因为一些像head或display:none的东西，就没有必要放在渲染树中了。</p>
+<p>5）有了Render Tree，浏览器已经能知道网页中有哪些节点，各个节点的CSS定义，以及它们的从属关系，下一步操作就是Layout,顾名思义，就是计算出每个节点在屏幕中的位置。布局使用流模型的Layout算法。Layout是一个递归的过程，每个节点都负责自己及其子节点的Layout。Layout结果是相对父节点的坐标和尺寸。</p>
+<p>6）Layout后，浏览器已经知道哪些节点要显示，每个节点的CSS属性是什么，每个节点在屏幕中的位置是哪里，就进入了最后一步painting,按照算出来的规则，通过显卡，把内容画到屏幕上。</p>
+<blockquote>
+<p><strong>GET和POST方式的对比？</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1、应用场景不同，Get 主要用于获取资源，Post 主要用于提交数据给服务器处理。</span><br><span class="line">2、Get 方式将传递的参数通过拼接URL的方式来传递，只能接收ASCII码，中文需要URL编码，长度限制。Get 方式的路径可以保存为书签，可以通过查历史记录再次调出。</span><br><span class="line">3、Post 方式将参数放在了请求体中，长度不受限制，传输的数据类型不受限制，不能被保存为书签。</span><br><span class="line">4、get在浏览器刷新时候是无害的，但是post请求会重新提交。</span><br><span class="line">5、get方式可以被浏览器缓冲，但是post不会。</span><br><span class="line">6、get方式的参数会暴露在URL的后面，所以我们不能用get方式处理一些带有铭感信息的请求</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----</span><br><span class="line">7、Get 和Post 本质上并没有什么不同，他们都是基于TCP连接的网络请求，只是由于HTTP的规定和客户端浏览器和服务器的规定，才有了GET和POST的不同，他们最大的不同在于语义的不同，我们使用的过程最好严格遵循语义，不要随便混用。</span><br><span class="line"></span><br><span class="line">8、大多数框架都是尽量在一个tcp包里面把HTTP请求发出去的，但是也存在一些特殊情况：对于get请求，浏览器会发送一次TCP数据包，也就是header和data会一次性发送，而Post请求会发送两次数据包，第一次发送header，返回100Continue。第二次发送数据过去。（这一点其实并不重要，感兴趣可以了解一下）</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>正在努力赶稿中～～</p>
+</blockquote>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 张锦杰 <br>
+        
+        原文链接 : <a href>http://yoursite.com/2019/06/12/net-interview-01/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qzone, qq, weibo, wechat, douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+    <div id="reward">
+  
+    <p id="reward-meta">知识 & 情怀 | 二者兼得</p>
+  
+  <button id="reward-btn">
+    
+    <span>投食</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src alt="微信扫一扫, 向我投食">
+        <p class="qrcode-meta">微信扫一扫, 向我投食</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src alt="支付宝扫一扫, 向我投食">
+        <p class="qrcode-meta">支付宝扫一扫, 向我投食</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/面试/">
+              #面试
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/网络/">
+              #网络
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/06/10/react-interview-05/" target="_self">React 从基础到进阶（五）</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2019/06/16/algoa-interview-01/" target="_self">排序算法</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz",
+      appKey: "WaR7nrzhliHj9aVwdQzkdlGd",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz", "WaR7nrzhliHj9aVwdQzkdlGd");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
+</div>
+
+
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
+    
+  </p>
+</footer>
+
+
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2019, 3, 7).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
+</html>
