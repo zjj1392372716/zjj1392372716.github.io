@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Vue,面试,源码分析,">
+    <meta name="keywords" content="Vue,Vue,">
   
 
   <script>
@@ -195,12 +195,12 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span>《VueJs源码揭秘》学习笔记 (二)</span>
+    <span>Vue 笔记系列 (六) vue 之 我们需要注意的一些细节问题</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-04-23
+      2019-07-13
     </span>
     
       <span>
@@ -212,7 +212,7 @@
     
     
       <span>
-        浏览 : <span class="article-timer" data-identity="vue-analysis-2"></span>
+        浏览 : <span class="article-timer" data-identity="vue-note-06"></span>
       </span>
     
   </div>
@@ -221,7 +221,43 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <p># </p>
+      <h2 id="一、props为什么我们不能修改？"><a href="#一、props为什么我们不能修改？" class="headerlink" title="一、props为什么我们不能修改？"></a>一、props为什么我们不能修改？</h2><p><strong>场景</strong></p>
+<p>vue对父组件给出的props做了修改，会在控制台抱一个错误，提示我们不应该修改，因为这样有违背单向数据流。<br>vue建议我们去使用传递的事件的触发来通知父组件去更新。</p>
+<blockquote>
+<p>错误提示：<code>Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop&#39;s value. Prop being mutated: &quot;name&quot;</code></p>
+</blockquote>
+<p><strong>情况一： props为基本数据类型</strong></p>
+<blockquote>
+<p>如果是普通类型，那么在修改时浏览器控制台会有报错信息</p>
+</blockquote>
+<p><strong>情况二： props为引用数据类型</strong></p>
+<blockquote>
+<p>如果props传入的值是引用类型，在子组件中改变其元素，不改变引用，那么不报错。</p>
+</blockquote>
+<p><strong>原因</strong></p>
+<blockquote>
+<p>vue底层通过Object.defineProperty对数据的set做了一定的处理，他有一个标识位，如果我们子组件修改props，那么标识位为false，会报错提示，如果是在父组件去更新的数据，那么标识位是true，我们可以继续 执行。</p>
+</blockquote>
+<h2 id="二、props的两种处理方式"><a href="#二、props的两种处理方式" class="headerlink" title="二、props的两种处理方式"></a>二、props的两种处理方式</h2><p>在两种情况下，我们很容易忍不住想去修改 prop 中数据：</p>
+<ul>
+<li>Prop 作为初始值传入后，子组件想把它当作局部数据来用；</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props: ['initialCounter'],</span><br><span class="line">data: function () &#123;  </span><br><span class="line">    return &#123; </span><br><span class="line">        counter: this.initialCounter  // 使用count初始化我们的数据</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Prop 作为原始数据传入，由子组件处理成其它数据输出。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props: ['size'],</span><br><span class="line">computed: &#123;</span><br><span class="line">  normalizedSize: function () &#123;    </span><br><span class="line">    return this.size.trim().toLowerCase(); //处理成计算属性</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三、-emit你可能不知道这一点"><a href="#三、-emit你可能不知道这一点" class="headerlink" title="三、$emit你可能不知道这一点"></a>三、$emit你可能不知道这一点</h2><ul>
+<li>可以传递回调给父组件，父组件传递消息回来</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 子组件</span><br><span class="line">changeProps() &#123;</span><br><span class="line">  var msg = "子组件传递的参数";</span><br><span class="line">  // 【1】可以传递回调给父组件，父组件传递消息回来</span><br><span class="line">  this.$emit("handlerChange", msg, (v) =&gt; &#123;</span><br><span class="line">    console.log('父组件又给我发消息了：', v)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 父组件</span><br><span class="line">handlerChange(msg, callback) &#123;</span><br><span class="line">  console.log('接收到子组件的数据了', msg);</span><br><span class="line">  this.name = msg;</span><br><span class="line">  callback("你可真是小可爱");</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="四、为什么有时候不建议我们去使用索引index作为列表的key"><a href="#四、为什么有时候不建议我们去使用索引index作为列表的key" class="headerlink" title="四、为什么有时候不建议我们去使用索引index作为列表的key"></a>四、为什么有时候不建议我们去使用索引index作为列表的key</h2><p>我们知道其实key主要用于我们组件更新时候能更快的速度去作出调整。</p>
+<p>我们先看个例子：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"border"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Children</span> <span class="attr">v-for</span>=<span class="string">"(key, index) in list"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"() =&gt; handleDelete(key)"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Children</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"handleAdd"</span>&gt;</span>添加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Children <span class="keyword">from</span> <span class="string">"./Children"</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">let</span> key = <span class="number">1</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="undefined">  components: &#123;</span></span><br><span class="line"><span class="undefined">    Children</span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">  data() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="undefined">      list: []</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">  methods: &#123;</span></span><br><span class="line"><span class="undefined">    handleAdd() &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.list.push(key++);</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="undefined">    handleDelete(key) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> index = <span class="keyword">this</span>.list.findIndex(<span class="function"><span class="params">k</span> =&gt;</span> k === key);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.list.splice(index, <span class="number">1</span>);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;;</span></span><br></pre></td></tr></table></figure></p>
+<p>点击按钮，动态添加列表长度。我们可以点击删除去删除某一个。</p>
+<p>比如我们是[0,1,2,3]四个元素了，此时我们打算删除第三个，之后我们的数组索引为[0,1,2];</p>
+<p>通过diff算法比较的时候，我们删除的确是最后一个。因为它认为我们的key值只是丢弃了最后一个。</p>
+<p>这就是我们使用动态key造成的bug了～，当我们使用真实的key的时候，我们就可以避免这个发生了～</p>
     </div>
   </div>
   
@@ -232,7 +268,7 @@
         
           本文作者 : 张锦杰 <br>
         
-        原文链接 : <a href>http://yoursite.com/2019/04/23/vue-analysis-2/</a><br>
+        原文链接 : <a href>http://yoursite.com/2019/07/13/vue-note-06/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -255,14 +291,8 @@
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/面试/">
-              #面试
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/源码分析/">
-              #源码分析
+            <a href="/tags/Vue/">
+              #Vue
             </a>
           </span>
           
@@ -287,13 +317,13 @@
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2019/04/23/vue-analysis-1/" target="_self">《VueJs源码揭秘》学习笔记 (一)</a>
+        <a href="/2019/07/10/vue-note-04/" target="_self">Vue 笔记系列 (四) vue 之 虚拟DOM和key属性作用</a>
       </div>
     
     
       <div class="nav-next">
         下一篇:
-        <a href="/2019/04/25/css-study-note-1/" target="_self">《CSS世界》 阅读笔记</a>
+        <a href="/2019/07/13/vue-note-05/" target="_self">Vue 笔记系列 (五) vue 之 Provide/inject</a>
         <i class="iconfont icon-next"></i>
       </div>
     

@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Vue,面试,源码分析,">
+    <meta name="keywords" content="Vue,Vue,">
   
 
   <script>
@@ -195,12 +195,12 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span>《VueJs源码揭秘》学习笔记 (二)</span>
+    <span>Vue 笔记系列 (二) vue 之 [.sync] 修饰符</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-04-23
+      2019-07-10
     </span>
     
       <span>
@@ -212,7 +212,7 @@
     
     
       <span>
-        浏览 : <span class="article-timer" data-identity="vue-analysis-2"></span>
+        浏览 : <span class="article-timer" data-identity="vue-note-02"></span>
       </span>
     
   </div>
@@ -221,7 +221,20 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <p># </p>
+      <h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>在一些情况下，我们可能会需要对一个 <code>prop</code> （父子组件传递数据的属性） 进行<strong>“双向绑定”</strong>。</p>
+<p>在<code>vue 1.x</code>中的<code>.sync</code>修饰符所提供的功能。当一个子组件改变了一个带<code>.sync</code>的<code>prop</code>的值时，这个变化也会同步到父组件中所绑定的值。</p>
+<blockquote>
+<p>这很方便，但也会导致问题，因为它破坏了单向数据流。（数据自上而下流，事件自下而上走）</p>
+</blockquote>
+<p>由于子组件改变 <code>prop</code> 的代码和普通的状体改动代码毫无区别，所以当你光看子组件的代码时，你完全不知道它合适悄悄地改变了父组件的状态。</p>
+<p>所以出与这种原因，我们在2.0抛弃了它，但是在实际应用中，我们发现 .sync 还是有其适用之处的，比如在开发可复用的组件库时。</p>
+<p>于是从 <code>vue 2.3.0</code> 开始，我们重新引入了 <code>.sync</code> 修饰符，但是这次它只是作为一个编译时的<strong>语法糖</strong>存在。<br>他会被自动扩展为一个 自动更新父组件属性的 <code>v-on</code>监听器。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span> <span class="attr">:foo.sync</span>=<span class="string">”msg”</span>&gt;</span><span class="tag">&lt;/<span class="name">child</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!--就会被扩展为： --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">child</span> <span class="attr">:foo</span>=<span class="string">”bar”</span> @<span class="attr">update:foo</span>=<span class="string">”val</span> =&gt;</span> bar = val”&gt;  </span><br><span class="line"><span class="comment">&lt;!--这样子组件可以触发事件去更新父组件的属性了，而且跟我们别的方式写法存在一定的不同。--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--当子组件需要更新 foo 的值的时候，他需要显示的触发一个更新事件：   </span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"></span><br><span class="line">this.$emit( “update:foo”, newValue );</span><br></pre></td></tr></table></figure>
+<h2 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--父组件的信息--&gt;</span></span><br><span class="line">    &#123;&#123;msg&#125;&#125;</span><br><span class="line">    <span class="comment">&lt;!--将信息传递出去--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--标注为sync，可以在子组件使用合适的方式更新--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">test-sync</span> <span class="attr">:msg.sync</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">test-sync</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> TestSync <span class="keyword">from</span> <span class="string">'../components/testSync.vue'</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="undefined">  data() &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">      msg: <span class="string">'zzzzz'</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">  components: &#123;</span></span><br><span class="line"><span class="undefined">    TestSync</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// </span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 子组件 --&gt;</span></span><br><span class="line">    子组件使用 &#123;&#123;msg&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"_changeMsg"</span>&gt;</span>更改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="undefined">  props: &#123;</span></span><br><span class="line"><span class="javascript">    msg: <span class="built_in">String</span></span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">  methods: &#123;</span></span><br><span class="line"><span class="undefined">    _changeMsg() &#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 【1】子组件触发更新，实现更改父级的数据，这里其实是语法糖行为。配合sync使用</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$emit(<span class="string">"update:msg"</span>, <span class="string">"新的msg"</span>)</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://files.jb51.net/file_images/article/201804/201804210856002.png" alt><br><img src="https://files.jb51.net/file_images/article/201804/201804210856003.png" alt><br><img src="https://files.jb51.net/file_images/article/201804/201804210856014.png" alt></p>
+<blockquote>
+</blockquote>
     </div>
   </div>
   
@@ -232,7 +245,7 @@
         
           本文作者 : 张锦杰 <br>
         
-        原文链接 : <a href>http://yoursite.com/2019/04/23/vue-analysis-2/</a><br>
+        原文链接 : <a href>http://yoursite.com/2019/07/10/vue-note-02/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -255,14 +268,8 @@
           <i class="iconfont icon-06tags"></i>标签: 
           
           <span class="span--tag">
-            <a href="/tags/面试/">
-              #面试
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/源码分析/">
-              #源码分析
+            <a href="/tags/Vue/">
+              #Vue
             </a>
           </span>
           
@@ -287,13 +294,13 @@
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2019/04/23/vue-analysis-1/" target="_self">《VueJs源码揭秘》学习笔记 (一)</a>
+        <a href="/2019/07/10/vue-note-01/" target="_self">Vue 笔记系列 (一) Vue2.4中 [$attrs] 和 [$listeners]</a>
       </div>
     
     
       <div class="nav-next">
         下一篇:
-        <a href="/2019/04/25/css-study-note-1/" target="_self">《CSS世界》 阅读笔记</a>
+        <a href="/2019/07/10/vue-note-03/" target="_self">Vue 笔记系列 (三) vue 之 单向数据流和双向数据绑定</a>
         <i class="iconfont icon-next"></i>
       </div>
     
