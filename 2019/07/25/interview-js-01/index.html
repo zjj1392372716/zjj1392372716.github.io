@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="张锦杰">
+  
+  
+  
+  <title>Meils 的 Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Javascript,面试,">
+  
+
+  <script>
+    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script>
+
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">张锦杰 的 Blog</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a href="/" target="_self">
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/" target="_self">
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/" target="_self">
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/" target="_self">
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          
+            <a href="/friends/" target="_self">
+              友链
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path>
+          
+            <a href="javascript:void(0);" v-else>抓到我</a>
+            <ul class="nav-menu--dropdown">
+              
+                <li>
+                  <a href="https://github.com/zjj1392372716" target="_blank">
+                    Github
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://juejin.im/user/5a1cbb46518825592c07d5f6" target="_blank">
+                    掘金
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://segmentfault.com/u/guchengshaonian_5a56fe95f2c32" target="_blank">
+                    思否
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>面试Javascript篇 (一)</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-07-25
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/Javascript/">
+            Javascript
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="interview-js-01"></span>
+      </span>
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h2 id="一、类型"><a href="#一、类型" class="headerlink" title="一、类型"></a>一、类型</h2><blockquote>
+<p>我们的 JavaScript 模块会从运行时、文法和执行过程三个阶段学习。</p>
+</blockquote>
+<p>JavaScript 语言的每一个值都属于某一种数据类型。js中共有7种数据类型，广泛用于变量、函数参数、表达式、函数返回值等场合。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Number</span><br><span class="line">undefined</span><br><span class="line">null</span><br><span class="line">String</span><br><span class="line">Object</span><br><span class="line">Symbol</span><br><span class="line">Boolean</span><br></pre></td></tr></table></figure>
+<h3 id="1、undefined"><a href="#1、undefined" class="headerlink" title="1、undefined"></a>1、undefined</h3><p>针对undefined我们需要知道如下：(不一定很全～)</p>
+<ul>
+<li>本意表示未初始化</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a; <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.loog(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="literal">undefined</span>; <span class="comment">// 这样子没意义</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>typeof </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>无论是未初始化还是未声明，使用typeof 都是undefined.</p>
+<blockquote>
+<p>面试题：为什么有的编程规范要求用 <code>void 0</code> 代替 <code>undefined</code> ？</p>
+</blockquote>
+<p><code>JavaScript</code> 的代码 <code>undefined</code> 是一个变量,而不是一个关键字。因此有些老的浏览器可以修改全局<code>undefined</code>值。为了防止某些情况下<code>undefined</code>被修改，我们推荐使用<code>void 0</code>来获取<code>undefined</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在chrome中显示undefined</span></span><br><span class="line"><span class="comment">// 在 IE 8 中显示10</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">undefined</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在ES5中全局undefined已经只是个可读的值了，但是局部变量仍然可以修改.</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="literal">undefined</span>);<span class="comment">// 输出了10</span></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 产生问题的例子</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="literal">undefined</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(a);<span class="comment">// 10</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>认识void</p>
+</blockquote>
+<p>void 后面跟上一个表达式，返回的都是 undefined。用 void 0 代替 undefined 能节省不少字节的大小，一些代码压缩工具就将undefined 替换为了 void 0.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);<span class="comment">// undefined 不用担心被重写了。</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>总之： undefined表示未初始化，我们没必要为一个新声明的变量初始化为undefined。使用typeof操作符返回的是undefined。同时它也不是一个关键字，因此我们可以声明一个变量，他的名字就是undefined，这样的话undefined就被覆盖掉了，我们推荐使用void 0来获取undefined</strong></p>
+</blockquote>
+<h3 id="2、null"><a href="#2、null" class="headerlink" title="2、null"></a>2、null</h3><p>Null 类型是第二个只有一个值的数据类型，这个特殊的值是 null。从逻辑角度来看，null 值表 示一个<strong>空对象指针</strong>，而这也正是使用 typeof 操作符检测 null 值时会返回”object”的原因(我们使用null表示一个空对象指针).</p>
+<p>用途： 如果定义的变量准备在将来用于保存对象，那么最好将该变量初始化为 null 而不是其他值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (car != <span class="literal">null</span>)&#123;</span><br><span class="line"><span class="comment">// 对 car 对象执行某些操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span>  == <span class="literal">undefined</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>undefined实际上是派生自null的，因此相等性判断是true。</p>
+<h3 id="3、Boolean"><a href="#3、Boolean" class="headerlink" title="3、Boolean"></a>3、Boolean</h3><p>任何其他类型都可以转换为Boolean类型的值。只有两种情况true、false。并且区分大小写。我们可以使用<code>Boolean()</code>方法来转换任意类型的值。</p>
+<h3 id="4、Number"><a href="#4、Number" class="headerlink" title="4、Number"></a>4、Number</h3><ul>
+<li>Number 使用 IEEE754 格式来表示 整数和浮点数值，但是是基本符合，js中还有几处特殊的情况。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NaN，占用了 9007199254740990</span><br><span class="line">Infinity 无穷大</span><br><span class="line">-Infinity 负无穷大</span><br></pre></td></tr></table></figure>
+<ul>
+<li>js中有<code>+0 和 -0</code>他们两者相等，但是仍存在一些问题.如果是加法则没问题，如果是除法我们使用了<code>-0</code>，结果则是负无穷大。如何区分 +0 和 -0，正是检测 1/x 是 Infinity 还是 -Infinity.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">-0</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>/x); <span class="comment">// -Infinity</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>/x); <span class="comment">// Infinity</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(+<span class="number">0</span> === <span class="number">-0</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>js数值格式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> intNum = <span class="number">55</span>; <span class="comment">// 整数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> octalNum1 = <span class="number">070</span>;</span><br><span class="line"><span class="keyword">var</span> octalNum2 = <span class="number">079</span>;</span><br><span class="line"><span class="keyword">var</span> octalNum3 = <span class="number">08</span>;</span><br><span class="line"><span class="comment">// 八进制的 56</span></span><br><span class="line"><span class="comment">// 无效的八进制数值——解析为 79 // 无效的八进制数值——解析为 8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hexNum1 = <span class="number">0xA</span>; <span class="comment">// 十六进制的 10 </span></span><br><span class="line"><span class="keyword">var</span> hexNum2 = <span class="number">0x1f</span>; <span class="comment">// 十六进制的 31</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>根据双精度浮点数的定义，Number 类型中有效的整数范围是 -0x1fffffffffffff 至 0x1fffffffffffff，所以 Number 无法精确表示此范围外的整数。</p>
+</li>
+<li><p>非整数的 Number 类型无法用 ==（=== 也不行） 来比较，一段著名的代码，这也正是我们第三题的问题，为什么在 JavaScript 中，0.1+0.2 不能 =0.3 （浮点运算精度问题是关键）</p>
+</li>
+</ul>
+<blockquote>
+<p>面试题：0.1+0.2 == 0.3? 那么浮点的比较就不能进行了吗？我们应该使用什么样的形式去比较浮点类型。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log( <span class="built_in">Math</span>.abs(<span class="number">0.1</span> + <span class="number">0.2</span> - <span class="number">0.3</span>) &lt;= <span class="built_in">Number</span>.EPSILON );</span><br></pre></td></tr></table></figure>
+<p>检查相差的值是否在最小精度范围内，来判断两个浮点是否相等。</p>
+<ul>
+<li>由于保存浮点数值需要的内存空间是保存整数值的两倍，因此 ECMAScript 会不失时机地将浮点数值 转换为整数值。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> floatNum1 = <span class="number">1.</span>; <span class="comment">// 小数点后面没有数字——解析为 1 </span></span><br><span class="line"><span class="keyword">var</span> floatNum2 = <span class="number">10.0</span>; <span class="comment">// 整数——解析为 10</span></span><br></pre></td></tr></table></figure>
+<p>浮点数值的最高精度是 17 位小数，但在进行算术计算时其精确度远远不如整数。例如，0.1 加 0.2 的结果不是 0.3，而是 <code>0.30000000000000004</code>。这个小小的舍入误差会导致无法测试特定的浮点数值。<br>我们计算0.05+0.25得到的是0.3;</p>
+<blockquote>
+<p>因此，永远不要测试某个特定的浮点数值。</p>
+</blockquote>
+<ul>
+<li>数值的范围</li>
+</ul>
+<p>由于内存的限制，ECMAScript 并不能保存世界上所有的数值。ECMAScript 能够表示的最小数值保 存在 Number.MIN_VALUE 中;能够表示的最大数值保存在 Number.MAX_VALUE 中.</p>
+<p>如果超出了这个范围那就是Infinity和-Infinity。超出范围的值是无法继续进行计算，我们可以使用isFinite()来判断一个值是否超出范围了～～</p>
+<ul>
+<li>NaN</li>
+</ul>
+<p>NaN表示不是数值，表示一个本来要返回数值的操作数未返回数值的情况。js中不同于其他语言，我们除数为0返回的是NaN，而不是报错。</p>
+<p>NaN参与的任何运算，其结果都是NaN。NaN不等于任何，包括自身。我们可以通过isNaN()来判断一个值是否是NaN。isNaN对先对参数进行一次数值转换，对转换后的值进行判断。</p>
+<h3 id="5、String"><a href="#5、String" class="headerlink" title="5、String"></a>5、String</h3><p>js中的字符类型采用Unicode字符集，UTF是基于Unicode的编码方式，常见的有UTF-8和UTF-16.</p>
+<p>js字符是不可变的，也就是说，字符串一旦创建，它们的值就不能改变。要改变 某个变量保存的字符串，首先要销毁原来的字符串，然后再用另一个包含新值的字符串填充该变量， 例如:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lang = <span class="string">"Java"</span>;</span><br><span class="line">    lang = lang + <span class="string">"Script"</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>首先创建一个能容纳 10 个字符的 新字符串，然后在这个字符串中填充”Java”和”Script”，最后一步是销毁原来的字符串”Java”和字 符串”Script”，因为这两个字符串已经没用了。</p>
+</blockquote>
+<h3 id="6、Symbol"><a href="#6、Symbol" class="headerlink" title="6、Symbol"></a>6、Symbol</h3><ul>
+<li>Symbol产生的原因：ES5的对象属性都是字符串，我们希望在别人的对象基础之上添加其他属性和方法，但是我们又担心会发生冲突，Symbol可以保证每一个属性都是独一无二的。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">Symbol</span>(<span class="string">'f'</span>);</span><br><span class="line"><span class="keyword">typeof</span> a; <span class="comment">// symbol</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</span><br><span class="line"><span class="keyword">let</span> s2 = <span class="built_in">Symbol</span>(<span class="string">'bar'</span>);</span><br><span class="line"></span><br><span class="line">s1 <span class="comment">// Symbol(foo)</span></span><br><span class="line">s2 <span class="comment">// Symbol(bar)</span></span><br><span class="line"></span><br><span class="line">s1.toString() <span class="comment">// "Symbol(foo)"</span></span><br><span class="line">s2.toString() <span class="comment">// "Symbol(bar)"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>产生一个Symbol,需要通过Symbol全局方法。Symbol如果接受一个对象，则会先通过toString方式去转为字符串。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  toString() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'abc'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> sym = <span class="built_in">Symbol</span>(obj);</span><br><span class="line">sym <span class="comment">// Symbol(abc)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> sym = <span class="built_in">Symbol</span>(obj);</span><br><span class="line">sym <span class="comment">// Symbol(abc)</span></span><br><span class="line"><span class="built_in">Symbol</span>([object <span class="built_in">Object</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Symbol是独一无二的</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a1 = <span class="built_in">Symbol</span>(<span class="string">"a"</span>);</span><br><span class="line"><span class="keyword">var</span> a2 = <span class="built_in">Symbol</span>(<span class="string">"a"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a1 == a2); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a1 = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">var</span> a2 = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="built_in">console</span>.log(a1 == a2); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Symbol描述符</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用了描述符</span></span><br><span class="line"><span class="keyword">var</span> a2 = <span class="built_in">Symbol</span>(<span class="string">"a"</span>);</span><br><span class="line">a2.description <span class="comment">// a</span></span><br></pre></td></tr></table></figure>
+<p><strong>应用场景一：作为对象的属性</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  abc: <span class="number">123</span>,</span><br><span class="line">  <span class="string">"hello"</span>: <span class="string">"world"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj[<span class="string">"abc"</span>] <span class="comment">// 123</span></span><br><span class="line">obj[<span class="string">"hello"</span>] <span class="comment">// 'world'</span></span><br></pre></td></tr></table></figure>
+<p>通常的对象属性都是通过字符串访问的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PROP_NAME = <span class="built_in">Symbol</span>(<span class="string">"name"</span>)</span><br><span class="line"><span class="keyword">const</span> PROP_AGE = <span class="built_in">Symbol</span>(<span class="string">"age"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  [PROP_NAME]: <span class="string">"一斤代码"</span></span><br><span class="line">&#125;</span><br><span class="line">obj[PROP_AGE] = <span class="number">18</span></span><br><span class="line"></span><br><span class="line">obj[PROP_NAME] <span class="comment">// '一斤代码'</span></span><br><span class="line">obj[PROP_AGE] <span class="comment">// 18</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;Symbol(name): "一斤代码", Symbol(age): 18&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>使用Symbol作为属性的好处就是，我们不用为属性的冲突担心了。</p>
+<blockquote>
+<p>Symbol 作为属性名，该属性不会出现在for…in、for…of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。但是，它也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象的所有 Symbol 属性名。</p>
+</blockquote>
+<p><strong>应用场景二：遍历</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">   [<span class="built_in">Symbol</span>(<span class="string">'name'</span>)]: <span class="string">'一斤代码'</span>,</span><br><span class="line">   age: <span class="number">18</span>,</span><br><span class="line">   title: <span class="string">'Engineer'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(obj)   <span class="comment">// ['age', 'title']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> p <span class="keyword">in</span> obj) &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(p)   <span class="comment">// 分别会输出：'age' 和 'title'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj)   <span class="comment">// ['age', 'title']</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">JSON</span>.stringify(obj)  <span class="comment">// &#123;"age":18,"title":"Engineer"&#125;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>但是这种情况并不都是坏处，相反这种特性对我们来说有时是一个非常棒的，比如我们可以将对象的属性划分为对内属性和对外属性，对内属性使用Symbol，对外属性使用非Symbol.</strong></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Object的API</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertySymbols(obj) <span class="comment">// [Symbol(name)]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用新增的反射API</span></span><br><span class="line"><span class="built_in">Reflect</span>.ownKeys(obj) <span class="comment">// [Symbol(name), 'age', 'title']</span></span><br></pre></td></tr></table></figure>
+<p><strong>应用场景三：替代常量</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TYPE_AUDIO = <span class="string">'AUDIO'</span></span><br><span class="line"><span class="keyword">const</span> TYPE_VIDEO = <span class="string">'VIDEO'</span></span><br><span class="line"><span class="keyword">const</span> TYPE_IMAGE = <span class="string">'IMAGE'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileResource</span>(<span class="params">resource</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span>(resource.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> TYPE_AUDIO:</span><br><span class="line">      playAudio(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> TYPE_VIDEO:</span><br><span class="line">      playVideo(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> TYPE_IMAGE:</span><br><span class="line">      previewImage(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Unknown type of resource'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比如上诉情况，我们经常定义一组常量来代表一种业务逻辑下的几个不同类型，这几种不同的类型都需要一个独一无二的值，我们通常使用字符串名称。</p>
+<p>使用Symbol后可以变得简单一些～～</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TYPE_AUDIO = <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> TYPE_VIDEO = <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> TYPE_IMAGE = <span class="built_in">Symbol</span>()</span><br></pre></td></tr></table></figure>
+<p><strong>应用场景四：Symbol来定义类的私有变量</strong></p>
+<p>我们知道Java的类中有private修饰符，可以是的 我们的成员属性 只能被内部访问和使用，不能被外部使用，我们借助Symbol也可以实现类似的效果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PASSWORD = <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Login</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(username, password) &#123;</span><br><span class="line">    <span class="keyword">this</span>.username = username</span><br><span class="line">    <span class="keyword">this</span>[PASSWORD] = password</span><br><span class="line">  &#125;</span><br><span class="line">  checkPassword(pwd) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>[PASSWORD] === pwd</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Login</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Login <span class="keyword">from</span> <span class="string">'./a'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> login = <span class="keyword">new</span> Login(<span class="string">'admin'</span>, <span class="string">'123456'</span>)</span><br><span class="line"></span><br><span class="line">login.checkPassword(<span class="string">'123456'</span>)  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">login.PASSWORD  <span class="comment">// oh!no!</span></span><br><span class="line">login[PASSWORD] <span class="comment">// oh!no!</span></span><br><span class="line">login[<span class="string">"PASSWORD"</span>] <span class="comment">// oh!no!</span></span><br></pre></td></tr></table></figure>
+<p>我们发现无论怎么都不可能访问到PASSWORD属性。</p>
+<p><strong>应用场景五：注册和获取全局Symbol</strong></p>
+<blockquote>
+<p>有时，我们希望重新使用同一个 Symbol 值，Symbol.for方法可以做到这一点。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gs1 = <span class="built_in">Symbol</span>.for(<span class="string">'global_symbol_1'</span>)  <span class="comment">//注册一个全局Symbol</span></span><br><span class="line"><span class="keyword">let</span> gs2 = <span class="built_in">Symbol</span>.for(<span class="string">'global_symbol_1'</span>)  <span class="comment">//获取全局Symbol</span></span><br><span class="line"></span><br><span class="line">gs1 === gs2  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>除了定义自己使用的 <code>Symbol</code> 值以外，<code>ES6</code> 还提供了 11 个内置的 <code>Symbol</code> 值，指向语言内部使用的方法。</p>
+<p>我们以最常用的一个为例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">o[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> v = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    next: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        value: v ++,</span><br><span class="line">        done: v &gt; <span class="number">10</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">of</span> o) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 0 1 2 3 4 5 6 7 8 9</span></span><br></pre></td></tr></table></figure>
+<h3 id="7、Object"><a href="#7、Object" class="headerlink" title="7、Object"></a>7、Object</h3><blockquote>
+<p>仅仅创建 Object 的实例并没有什么用处，但关键是要理解一个重要的思想: 即在 ECMAScript 中，Object 类型是所有它的实例的基础。换句话说 Object 类型所具有的任何属性和方法也同样存在于更具体的对象中。</p>
+</blockquote>
+<ul>
+<li>constructor: 保存着用于创建当前对象的函数</li>
+<li>hasOwnProperty(propertyName): 用于检查给定的属性在当前对象实例中</li>
+<li>propertyIsEnumerable(propertyName): 检测是否可以被枚举</li>
+<li>toString: 返回字符串表示形式</li>
+<li>valueOf: 返回对象的字符串、数值或布尔值表示。</li>
+</ul>
+<blockquote>
+<p>js中的几个基本数据类型，都在对象类型中有一个亲戚：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String</span><br><span class="line">Number</span><br><span class="line">Boolean</span><br><span class="line">Symbol</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>所以，我们必须认识到 3 与 new Number(3) 是完全不同的值，它们一个是 Number 类型， 一个是对象类型。</p>
+</blockquote>
+<p>JavaScript 语言设计上试图模糊<strong>对象</strong>和<strong>基本类型</strong>之间的关系，我们日常代码可以把对象的方法在基本类型上使用，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"abc"</span>.charAt(<span class="number">0</span>));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>总结：.操作符会自动为我们进行一次装箱操作，将基本数据类型临时构造一个对象，使得我们能够调用对象上的方法</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>我们还需要记住一句话：对于基本类型来说，如果使用字面量的方式，那么这个变量只是个字面量，只有在必要的时候才会转换为对应的类型。</strong></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">111</span> <span class="comment">// 这只是字面量，不是 number 类型</span></span><br><span class="line">a.toString() <span class="comment">// 使用时候才会转换为对象类型</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、类型转换"><a href="#二、类型转换" class="headerlink" title="二、类型转换"></a>二、类型转换</h2>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 张锦杰 <br>
+        
+        原文链接 : <a href>http://yoursite.com/2019/07/25/interview-js-01/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qzone, qq, weibo, wechat, douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/面试/">
+              #面试
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/07/22/webpack4-01/" target="_self">Webpack重学系列 (一)</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2019/07/29/vue-note-07/" target="_self">Vue 笔记系列 (七) vue通信之 派发与广播【自行实现 dispatch 和 broadcast 方法】</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz",
+      appKey: "WaR7nrzhliHj9aVwdQzkdlGd",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz", "WaR7nrzhliHj9aVwdQzkdlGd");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
+</div>
+
+
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
+    
+  </p>
+</footer>
+
+
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2019, 3, 7).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
+</html>

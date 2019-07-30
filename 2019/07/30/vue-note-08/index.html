@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="张锦杰">
+  
+  
+  
+  <title>Meils 的 Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Vue,Vue,">
+  
+
+  <script>
+    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script>
+
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">张锦杰 的 Blog</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a href="/" target="_self">
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/" target="_self">
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/" target="_self">
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/" target="_self">
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          
+            <a href="/friends/" target="_self">
+              友链
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path>
+          
+            <a href="javascript:void(0);" v-else>抓到我</a>
+            <ul class="nav-menu--dropdown">
+              
+                <li>
+                  <a href="https://github.com/zjj1392372716" target="_blank">
+                    Github
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://juejin.im/user/5a1cbb46518825592c07d5f6" target="_blank">
+                    掘金
+                  </a>
+                </li>
+              
+                <li>
+                  <a href="https://segmentfault.com/u/guchengshaonian_5a56fe95f2c32" target="_blank">
+                    思否
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>Vue 笔记系列 (八) vue中extend，mixins，extends，components,install的几个操作</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-07-30
+    </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/Vue/">
+            Vue
+          </a>
+      </span>
+    
+    
+      <span>
+        浏览 : <span class="article-timer" data-identity="vue-note-08"></span>
+      </span>
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <blockquote>
+<p>你知道extend,mixins,extends，components,install用法吗? 你知道他们的区别吗? 你知道他们的执行顺序嘛? 很多初学开发者都对这些不是很熟悉～</p>
+</blockquote>
+<h2 id="一、Vue-extend"><a href="#一、Vue-extend" class="headerlink" title="一、Vue.extend"></a>一、Vue.extend</h2><p>Vue.extend返回的是一个扩展实例构造器，也就是预设了部分选项的Vue实例构造器。主要服务于Vue.Component, 用来生成组件。</p>
+<p>用法：使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建构造器</span></span><br><span class="line"><span class="keyword">var</span> Profile = Vue.extend(&#123;</span><br><span class="line">  template: <span class="string">'&lt;p&gt;&#123;&#123;extendData&#125;&#125;&lt;/br&gt;实例传入的数据为:&#123;&#123;propsExtend&#125;&#125;&lt;/p&gt;'</span>,<span class="comment">//template对应的标签最外层必须只有一个标签</span></span><br><span class="line">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      extendData: <span class="string">'这是extend扩展的数据'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  props:[<span class="string">'propsExtend'</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 创建 Profile 实例，并挂载到一个元素上。可以通过propsData传参.</span></span><br><span class="line"><span class="keyword">new</span> Profile(&#123;<span class="attr">propsData</span>:&#123;<span class="attr">propsExtend</span>:<span class="string">'我是实例传入的数据'</span>&#125;&#125;).$mount(<span class="string">'#app-extend'</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Vue.extend实际是创建一个构造器,对应的初始化构造器,并将其挂载到标签上.</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> component = <span class="keyword">new</span> Profile().$mount();</span><br></pre></td></tr></table></figure>
+<p>这一步，我们调用了 <code>$mount</code> 方法对组件进行了手动渲染，但它仅仅是被渲染好了，并没有挂载到节点上，也就显示不了组件。此时的 <code>component</code> 已经是一个标准的 <code>Vue</code> 组件实例，因此它的 <code>$el</code> 属性也可以被访问：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.appendChild(component.$el);</span><br></pre></td></tr></table></figure>
+<p>使用appendChild可以挂在到某一个节点上，当然，除了 body，你还可以挂载到其它节点上。</p>
+<p>$mount 也有一些快捷的挂载方式，以下两种都是可以的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 $mount 里写参数来指定挂载的节点</span></span><br><span class="line"><span class="keyword">new</span> Profile().$mount(<span class="string">'#app'</span>);</span><br><span class="line"><span class="comment">// 不用 $mount，直接在创建实例时指定 el 选项</span></span><br><span class="line"><span class="keyword">new</span> Profile(&#123; <span class="attr">el</span>: <span class="string">'#app'</span> &#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Vue.extend创建的扩展实例构造器还可以配合Vue.component去使用。</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"box"</span>&gt;</span><br><span class="line">  &lt;yeluosen&gt;<span class="xml"><span class="tag">&lt;/<span class="name">yeluosen</span>&gt;</span></span></span><br><span class="line"> &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"> </span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">  var YLS = Vue.extend(&#123;</span></span><br><span class="line"><span class="regexp">      data () &#123;</span></span><br><span class="line"><span class="regexp">          return &#123;</span></span><br><span class="line"><span class="regexp">              msg: '我是叶落森'</span></span><br><span class="line"><span class="regexp">          &#125;;</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      template: '&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;/</span>h1&gt;<span class="string">'</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br><span class="line"><span class="string">  Vue.component("yeluosen", YLS);</span></span><br><span class="line"><span class="string">  var vm = new Vue(&#123;</span></span><br><span class="line"><span class="string">      el: "#box"</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>实现类似的效果，除了用 extend 外，也可以直接创建 Vue 实例，并且用一个 Render 函数来渲染一个 .vue 文件：</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test1.js</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> Test1 <span class="keyword">from</span> <span class="string">'./test1.vue'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提供props</span></span><br><span class="line"><span class="keyword">const</span> props = &#123;</span><br><span class="line">  countDefault: <span class="number">10</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建vue实例</span></span><br><span class="line"><span class="keyword">const</span> Instance = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  render (h) &#123;</span><br><span class="line">    <span class="keyword">return</span> h(Test1, &#123;</span><br><span class="line">      props: props</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> component = Instance.$mount(); <span class="comment">// 渲染</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(component.$el); <span class="comment">// 挂载</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// test1.vue</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"aaaa"</span>&gt;</span></span><br><span class="line">    &#123;&#123;count&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> @<span class="attr">click</span>=<span class="string">"handlerClick"</span>&gt;</span>点击我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="undefined">  props: &#123;</span></span><br><span class="line"><span class="undefined">    countDefault: &#123;</span></span><br><span class="line"><span class="javascript">      type: <span class="built_in">Number</span>,</span></span><br><span class="line"><span class="javascript">      <span class="keyword">default</span>: <span class="number">0</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">  data () &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">      count: <span class="keyword">this</span>.countDefault</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;,</span></span><br><span class="line"><span class="undefined">  methods: &#123;</span></span><br><span class="line"><span class="undefined">    handlerClick() &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.count += <span class="number">1</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"./common/extend/test1.js"</span>);</span><br></pre></td></tr></table></figure>
+<p>这样既可以使用 .vue 来写复杂的组件（毕竟在 template 里堆字符串很痛苦），还可以根据需要传入适当的 props。渲染后，如果想操作 Render 的 Notification 实例，也是很简单的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> notification = Instance.$children[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的是，我们是用 <code>$mount</code> 手动渲染的组件，如果要销毁，也要用 <code>$destroy</code> 来手动销毁实例，必要时，也可以用 removeChild 把节点从 DOM 中移除。<strong>以上就是Vue.extent的用法，平时的我们大多关注业务，因此这个API很少使用～但是在开发组件库，开发全局组件的时候很有作用的哦～～</strong></p>
+</blockquote>
+<h2 id="二、Vue-Component"><a href="#二、Vue-Component" class="headerlink" title="二、Vue.Component"></a>二、Vue.Component</h2><p>用法：<code>Vue.component( id, [definition] )</code>用来注册或者获取全局组件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册组件，传入一个扩展过的构造器</span></span><br><span class="line">Vue.component(<span class="string">'my-component'</span>, Vue.extend(&#123; <span class="comment">/* ... */</span> &#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册组件，传入一个选项对象 (自动调用 Vue.extend)</span></span><br><span class="line">Vue.component(<span class="string">'my-component'</span>, &#123; <span class="comment">/* ... */</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取注册的组件 (始终返回构造器)</span></span><br><span class="line"><span class="keyword">var</span> MyComponent = Vue.component(<span class="string">'my-component'</span>)</span><br></pre></td></tr></table></figure>
+<p>来一个例子～～</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.创建组件构造器</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  props: [],</span><br><span class="line">  template: <span class="string">'&lt;div&gt;&lt;p&gt;&#123;&#123;extendData&#125;&#125;&lt;/p&gt;&lt;/div&gt;'</span>,<span class="comment">//最外层只能有一个大盒子,这个和&lt;tempalte&gt;对应规则一致</span></span><br><span class="line">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      extendData: <span class="string">'这是Vue.component传入Vue.extend注册的组件'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Profile = Vue.extend(obj); <span class="comment">// 扩展实例构造器</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2.注册组件方法一:传入Vue.extend扩展过得构造器</span></span><br><span class="line">Vue.component(<span class="string">'component-one'</span>, Profile)</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.注册组件方法二:直接传入，首先调用Vue.extend</span></span><br><span class="line">Vue.component(<span class="string">'component-two'</span>, obj)</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.挂载</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取注册的组件 (始终返回构造器)</span></span><br><span class="line"><span class="keyword">var</span> oneComponent = Vue.component(<span class="string">'component-one'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(oneComponent===Profile)<span class="comment">//true,返回的Profile构造器</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Vue.Component在创建全局组件的时候启着很大的作用～～</p>
+</blockquote>
+<h2 id="三、Mixins"><a href="#三、Mixins" class="headerlink" title="三、Mixins"></a>三、Mixins</h2><p>Mixins这块，转到我的另一篇文章 =&gt; <a href="https://segmentfault.com/a/1190000015698391" target="_blank" rel="noopener">Vue 之 Mixins （混入）</a></p>
+<h2 id="四、extends-继承"><a href="#四、extends-继承" class="headerlink" title="四、extends 继承"></a>四、extends 继承</h2><blockquote>
+<p>允许声明扩展另一个组件(可以是一个简单的选项对象或构造函数)，而无需使用 Vue.extend。这主要是为了便于扩展单文件组件。这和 mixins 类似。</p>
+</blockquote>
+<p>但是extends与mixins还是有区别的，mixins可以接收一个数组，一次去混入不同的组件选项。但是extends的值只能是一个简单的选项对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 继承的</span></span><br><span class="line"><span class="keyword">var</span> extend=&#123;</span><br><span class="line">    data:&#123;<span class="attr">extendData</span>:<span class="string">'我是extend的data'</span>&#125;,</span><br><span class="line">    created:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是extend的created'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      getSum:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这是extend的getSum里面的方法'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// mixin混入的</span></span><br><span class="line">  <span class="keyword">var</span> mixin=&#123;</span><br><span class="line">    data:&#123;<span class="attr">mixinData</span>:<span class="string">'我是mixin的data'</span>&#125;,</span><br><span class="line">    created:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是mixin的created'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      getSum:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这是mixin的getSum里面的方法'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 本身</span></span><br><span class="line">  <span class="keyword">var</span> vm=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">'#app'</span>,</span><br><span class="line">    data:&#123;<span class="attr">mixinData</span>:<span class="string">'我是vue实例的data'</span>&#125;,</span><br><span class="line">    created:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'这是vue实例的created'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      getSum:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这是vue实例里面getSum的方法'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mixins:[mixin],</span><br><span class="line">    extends:extend</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//打印结果</span></span><br><span class="line">  <span class="comment">// 这是extend的created</span></span><br><span class="line">  <span class="comment">// 这是mixin的created</span></span><br><span class="line">  <span class="comment">// 这是vue实例的created</span></span><br><span class="line">  <span class="comment">// 这是vue实例里面getSum的方法</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>生命周期方法：extends =&gt; misxin =&gt; 本身实例的。选项中数据属性如data,methods,后面执行的回覆盖前面的</p>
+</blockquote>
+<h2 id="五、install"><a href="#五、install" class="headerlink" title="五、install"></a>五、install</h2><ol>
+<li>是开发vue的插件,这个方法的第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象(可选) </li>
+<li>vue.use方法可以调用install方法,会自动阻止多次注册相同插件</li>
+</ol>
+<ul>
+<li>基本模版</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">MyPlugin.install = <span class="function"><span class="keyword">function</span> (<span class="params">Vue, options</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 1. 添加全局方法或属性</span></span><br><span class="line">  Vue.myGlobalMethod = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 添加全局资源</span></span><br><span class="line">  Vue.directive(<span class="string">'my-directive'</span>, &#123;</span><br><span class="line">    bind (el, binding, vnode, oldVnode) &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 注入组件选项</span></span><br><span class="line">  Vue.mixin(&#123;</span><br><span class="line">    created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 4. 添加实例方法</span></span><br><span class="line">  Vue.prototype.$myMethod = <span class="function"><span class="keyword">function</span> (<span class="params">methodOptions</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>Vue.extend</code>和<code>Vue.component</code>是为了创建构造器和组件; <code>mixins</code>和<code>extends</code>是为了拓展组件; <code>install</code>是开发插件;</p>
+</blockquote>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 张锦杰 <br>
+        
+        原文链接 : <a href>http://yoursite.com/2019/07/30/vue-note-08/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qzone, qq, weibo, wechat, douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/Vue/">
+              #Vue
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/07/29/vue-note-07/" target="_self">Vue 笔记系列 (七) vue通信之 派发与广播【自行实现 dispatch 和 broadcast 方法】</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2019/07/30/vue-note-09/" target="_self">Vue 笔记系列 (九) Vue.js 2.0 独立构建和运行时构建的区别</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz",
+      appKey: "WaR7nrzhliHj9aVwdQzkdlGd",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
+
+  
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz", "WaR7nrzhliHj9aVwdQzkdlGd");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
+
+</div>
+
+
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
+    
+  </p>
+</footer>
+
+
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2019, 3, 7).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
+</html>
